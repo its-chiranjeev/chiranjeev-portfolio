@@ -1,0 +1,131 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    /* Stitch Dark Theme as Default Root Experience */
+    --bg-canvas: #09090b;
+    --bg-surface: #121216;
+    --bg-surface-elevated: #18181f;
+    --bg-surface-subtle: #1e1e26;
+
+    --border-subtle: #272730;
+    --border-strong: #3f3f4e;
+
+    --text-primary: #f4f4f6;
+    --text-secondary: #a1a1aa;
+    --text-tertiary: #71717a;
+
+    --accent-lime: #a3e635;
+    --accent-lime-hover: #bef264;
+    --accent-lime-muted: rgba(163, 230, 53, 0.12);
+
+    --card: #121216;
+    --card-border: #272730;
+    --ring: #a3e635;
+  }
+
+  [data-theme="light"],
+  .light {
+    --bg-canvas: #f8fafc;
+    --bg-surface: #ffffff;
+    --bg-surface-elevated: #f1f5f9;
+    --bg-surface-subtle: #e2e8f0;
+
+    --border-subtle: #e2e8f0;
+    --border-strong: #cbd5e1;
+
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-tertiary: #64748b;
+
+    --accent-lime: #4d7c0f;
+    --accent-lime-hover: #3f6212;
+    --accent-lime-muted: rgba(77, 124, 15, 0.1);
+
+    --card: #ffffff;
+    --card-border: #e2e8f0;
+    --ring: #4d7c0f;
+  }
+
+  [data-theme="dark"],
+  .dark {
+    --bg-canvas: #09090b;
+    --bg-surface: #121216;
+    --bg-surface-elevated: #18181f;
+    --bg-surface-subtle: #1e1e26;
+
+    --border-subtle: #272730;
+    --border-strong: #3f3f4e;
+
+    --text-primary: #f4f4f6;
+    --text-secondary: #a1a1aa;
+    --text-tertiary: #71717a;
+
+    --accent-lime: #a3e635;
+    --accent-lime-hover: #bef264;
+    --accent-lime-muted: rgba(163, 230, 53, 0.12);
+
+    --card: #121216;
+    --card-border: #272730;
+    --ring: #a3e635;
+  }
+}
+
+@theme {
+  --font-sans: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  --color-canvas: var(--bg-canvas);
+  --color-surface: var(--bg-surface);
+  --color-surface-elevated: var(--bg-surface-elevated);
+  --color-surface-subtle: var(--bg-surface-subtle);
+
+  --color-border-subtle: var(--border-subtle);
+  --color-border-strong: var(--border-strong);
+
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+
+  --color-accent-lime: var(--accent-lime);
+  --color-accent-lime-hover: var(--accent-lime-hover);
+  --color-accent-lime-muted: var(--accent-lime-muted);
+
+  --color-card: var(--card);
+  --color-card-border: var(--card-border);
+  --color-ring: var(--ring);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Custom scrollbar matching Stitch design */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-canvas);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-subtle);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-strong);
+}
