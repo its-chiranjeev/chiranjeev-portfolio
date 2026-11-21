@@ -28,3 +28,20 @@ export function getProjectBySlug(slug: string): ProjectCaseStudy | null {
   );
   return project || null;
 }
+
+/**
+ * Retrieves adjacent previous and next published projects for case study navigation.
+ */
+export function getAdjacentProjects(currentSlug: string): {
+  prev: ProjectCaseStudy | null;
+  next: ProjectCaseStudy | null;
+} {
+  const published = getAllProjects();
+  const currentIndex = published.findIndex((p) => p.slug === currentSlug);
+  if (currentIndex === -1) {
+    return { prev: null, next: null };
+  }
+  const prev = currentIndex > 0 ? published[currentIndex - 1] : null;
+  const next = currentIndex < published.length - 1 ? published[currentIndex + 1] : null;
+  return { prev, next };
+}
