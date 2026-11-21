@@ -15,6 +15,8 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://chiranjeev.dev";
+
 export const metadata: Metadata = {
   title: {
     default: "Chiranjeev Rastogi | Node.js Backend Developer",
@@ -22,13 +24,24 @@ export const metadata: Metadata = {
   },
   description:
     "Portfolio of Chiranjeev Rastogi — Node.js Backend Developer specializing in NestJS, TypeScript, PostgreSQL, and scalable REST API architectures.",
-  authors: [{ name: "Chiranjeev Rastogi" }],
+  authors: [{ name: "Chiranjeev Rastogi", url: SITE_URL }],
   creator: "Chiranjeev Rastogi",
-  metadataBase: new URL("https://chiranjeev.dev"),
+  metadataBase: new URL(SITE_URL),
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://chiranjeev.dev",
+    url: SITE_URL,
     siteName: "Chiranjeev Rastogi Portfolio",
     title: "Chiranjeev Rastogi | Node.js Backend Developer",
     description:
@@ -38,7 +51,7 @@ export const metadata: Metadata = {
         url: "/images/logo.png",
         width: 800,
         height: 800,
-        alt: "Chiranjeev Rastogi",
+        alt: "Chiranjeev Rastogi — Node.js Backend Developer Logo",
       },
     ],
   },
@@ -50,7 +63,12 @@ export const metadata: Metadata = {
     images: ["/images/logo.png"],
   },
   icons: {
-    icon: "/images/logo.png",
+    icon: [
+      { url: "/images/logo.png" },
+    ],
+    apple: [
+      { url: "/images/logo.png" },
+    ],
   },
 };
 
@@ -70,6 +88,34 @@ const themeScript = `(function() {
   } catch (e) {}
 })();`;
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Chiranjeev Rastogi",
+  jobTitle: "Node.js Backend Developer",
+  url: SITE_URL,
+  sameAs: [
+    "https://github.com/its-chiranjeev",
+    "https://linkedin.com/in/chiranjeev-rastogi",
+  ],
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Ghaziabad",
+    addressRegion: "Uttar Pradesh",
+    addressCountry: "India",
+  },
+  knowsAbout: [
+    "Node.js",
+    "NestJS",
+    "TypeScript",
+    "PostgreSQL",
+    "TypeORM",
+    "REST APIs",
+    "Microservices",
+    "System Architecture",
+  ],
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -83,8 +129,19 @@ export default function RootLayout({
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </head>
       <body className="min-h-screen bg-[var(--bg-canvas)] text-[var(--text-primary)] antialiased transition-colors duration-200">
+        {/* Skip to Main Content Link for Keyboard and Screen Reader Accessibility */}
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[var(--accent-lime)] focus:text-black focus:font-mono focus:text-xs focus:font-bold focus:rounded-md focus:shadow-xl focus:outline-none focus:ring-2 focus:ring-black"
+        >
+          Skip to main content
+        </a>
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>

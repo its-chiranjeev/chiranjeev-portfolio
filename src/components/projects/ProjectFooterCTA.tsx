@@ -7,7 +7,7 @@ export function ProjectFooterCTA() {
     <section className="py-16 text-center">
       <div className="max-w-2xl mx-auto p-8 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] relative overflow-hidden">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--accent-lime-muted)] text-[var(--accent-lime)] text-xs font-mono font-medium mb-4">
-          <span className="w-2 h-2 rounded-full bg-[var(--accent-lime)] animate-pulse" />
+          <span className="w-2 h-2 rounded-full bg-[var(--accent-lime)] animate-pulse motion-reduce:animate-none" />
           Open for Backend Opportunities
         </div>
 
@@ -21,7 +21,7 @@ export function ProjectFooterCTA() {
 
         <div className="flex flex-wrap items-center justify-center gap-3">
           <Button
-            href="mailto:chiranjeev.rastogi@gmail.com"
+            href="mailto:chiranjeevrastogi@gmail.com"
             variant="primary"
             size="md"
             className="font-mono text-xs uppercase tracking-wider"

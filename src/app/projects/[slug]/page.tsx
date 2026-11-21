@@ -34,10 +34,19 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: `${project.title} — Technical Case Study | Chiranjeev Rastogi`,
     description: `${project.tagline}. ${project.shortDescription}`,
+    alternates: {
+      canonical: `/projects/${project.slug}`,
+    },
     openGraph: {
       title: `${project.title} — Technical Case Study | Chiranjeev Rastogi`,
       description: project.shortDescription,
       type: "article",
+      url: `/projects/${project.slug}`,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${project.title} — Technical Case Study | Chiranjeev Rastogi`,
+      description: project.shortDescription,
     },
   };
 }
@@ -56,7 +65,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
     <div className="min-h-screen flex flex-col bg-[var(--bg-canvas)] text-[var(--text-primary)]">
       <ProjectDetailNavbar projectTitle={project.title} />
 
-      <main className="flex-1">
+      <main id="main-content" className="flex-1">
         <article>
           <ProjectDetailHero project={project} />
 

@@ -21,26 +21,26 @@ export function PortfolioFooter() {
           </div>
 
           {/* Center: In-page navigation */}
-          <div className="flex flex-wrap items-center justify-center gap-5 text-[var(--text-secondary)]">
-            <a href="#about" className="hover:text-[var(--accent-lime)] transition-colors">
+          <nav aria-label="Footer Navigation" className="flex flex-wrap items-center justify-center gap-5 text-[var(--text-secondary)]">
+            <Link href="/portfolio#about" className="hover:text-[var(--accent-lime)] transition-colors">
               About
-            </a>
-            <a href="#skills" className="hover:text-[var(--accent-lime)] transition-colors">
+            </Link>
+            <Link href="/portfolio#skills" className="hover:text-[var(--accent-lime)] transition-colors">
               Skills
-            </a>
-            <a href="#experience" className="hover:text-[var(--accent-lime)] transition-colors">
+            </Link>
+            <Link href="/portfolio#experience" className="hover:text-[var(--accent-lime)] transition-colors">
               Experience
-            </a>
-            <a href="#projects" className="hover:text-[var(--accent-lime)] transition-colors">
+            </Link>
+            <Link href="/portfolio#projects" className="hover:text-[var(--accent-lime)] transition-colors">
               Projects
-            </a>
-            <a href="#education" className="hover:text-[var(--accent-lime)] transition-colors">
+            </Link>
+            <Link href="/portfolio#education" className="hover:text-[var(--accent-lime)] transition-colors">
               Education
-            </a>
-            <a href="#contact" className="hover:text-[var(--accent-lime)] transition-colors">
+            </Link>
+            <Link href="/portfolio#contact" className="hover:text-[var(--accent-lime)] transition-colors">
               Contact
-            </a>
-          </div>
+            </Link>
+          </nav>
 
           {/* Right: Actions */}
           <div className="flex items-center gap-4">
@@ -53,9 +53,10 @@ export function PortfolioFooter() {
             </Link>
 
             <a
-              href="#hero"
+              href="#main-content"
               className="p-2 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-surface-elevated)] hover:text-[var(--text-primary)] transition-colors"
               title="Return to top"
+              aria-label="Return to top"
             >
               <ArrowUp className="w-4 h-4" />
             </a>

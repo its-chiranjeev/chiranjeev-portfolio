@@ -21,6 +21,21 @@ export const metadata: Metadata = {
   title: "Main Portfolio",
   description:
     "Explore the full engineering portfolio of Chiranjeev Rastogi: Node.js, NestJS, and PostgreSQL case studies, technical skills taxonomy, internship experience, and education.",
+  alternates: {
+    canonical: "/portfolio",
+  },
+  openGraph: {
+    title: "Main Portfolio | Chiranjeev Rastogi",
+    description:
+      "Explore the full engineering portfolio of Chiranjeev Rastogi: Node.js, NestJS, and PostgreSQL case studies, technical skills taxonomy, internship experience, and education.",
+    url: "/portfolio",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Main Portfolio | Chiranjeev Rastogi",
+    description:
+      "Explore the full engineering portfolio of Chiranjeev Rastogi: Node.js, NestJS, and PostgreSQL case studies, technical skills taxonomy, internship experience, and education.",
+  },
 };
 
 export default function PortfolioPage() {
@@ -34,7 +49,7 @@ export default function PortfolioPage() {
   return (
     <div className="min-h-screen flex flex-col bg-[var(--bg-canvas)] text-[var(--text-primary)]">
       <PortfolioNavbar />
-      <main id="hero" className="flex-1">
+      <main id="main-content" className="flex-1">
         <PortfolioHero
           name={site.name}
           title={site.title}

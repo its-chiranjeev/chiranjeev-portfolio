@@ -5,7 +5,7 @@ import { GithubIcon, LinkedinIcon } from "@/components/ui/icons";
 import { Menu, X, ArrowLeft, FileText } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const NAV_LINKS = [
   { label: "About", href: "#about" },
@@ -18,6 +18,17 @@ const NAV_LINKS = [
 
 export function PortfolioNavbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [mobileMenuOpen]);
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-[var(--border-subtle)] bg-[var(--bg-canvas)]/85 backdrop-blur-md">
@@ -53,7 +64,7 @@ export function PortfolioNavbar() {
         </div>
 
         {/* Center: Desktop Section Anchors */}
-        <nav className="hidden lg:flex items-center gap-6">
+        <nav aria-label="Section Navigation" className="hidden lg:flex items-center gap-6">
           {NAV_LINKS.map((link) => (
             <a
               key={link.label}
@@ -108,6 +119,7 @@ export function PortfolioNavbar() {
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileMenuOpen}
+            aria-controls="portfolio-mobile-menu"
             className="p-2 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors cursor-pointer"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -117,7 +129,12 @@ export function PortfolioNavbar() {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="sm:hidden border-b border-[var(--border-subtle)] bg-[var(--bg-surface)] px-4 py-5 space-y-3 shadow-xl">
+        <div
+          id="portfolio-mobile-menu"
+          role="region"
+          aria-label="Portfolio Mobile Navigation"
+          className="sm:hidden border-b border-[var(--border-subtle)] bg-[var(--bg-surface)] px-4 py-5 space-y-3 shadow-xl"
+        >
           <Link
             href="/"
             onClick={() => setMobileMenuOpen(false)}
@@ -154,6 +171,7 @@ export function PortfolioNavbar() {
                 href="https://github.com/its-chiranjeev"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="GitHub Profile"
                 className="p-1 hover:text-[var(--text-primary)]"
               >
                 <GithubIcon className="w-4 h-4" />
@@ -162,6 +180,7 @@ export function PortfolioNavbar() {
                 href="https://linkedin.com/in/chiranjeev-rastogi"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="LinkedIn Profile"
                 className="p-1 hover:text-[var(--text-primary)]"
               >
                 <LinkedinIcon className="w-4 h-4" />

@@ -5,10 +5,21 @@ import { GithubIcon, LinkedinIcon } from "@/components/ui/icons";
 import { Menu, X, ArrowRight, FileText } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function LandingNavbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [mobileMenuOpen]);
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-[var(--border-subtle)] bg-[var(--bg-canvas)]/80 backdrop-blur-md">
@@ -30,7 +41,7 @@ export function LandingNavbar() {
               Chiranjeev Rastogi
             </span>
             <div className="flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-lime)] animate-pulse" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-lime)] animate-pulse motion-reduce:animate-none" />
               <span className="font-mono text-[10px] text-[var(--text-tertiary)] uppercase tracking-wider">
                 Backend Dev
               </span>
@@ -39,7 +50,7 @@ export function LandingNavbar() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-6">
+        <nav aria-label="Desktop Navigation" className="hidden md:flex items-center gap-6">
           <Link
             href="/portfolio"
             className="text-xs font-mono font-medium text-[var(--text-secondary)] hover:text-[var(--accent-lime)] transition-colors flex items-center gap-1"
@@ -84,6 +95,7 @@ export function LandingNavbar() {
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-navigation"
             className="p-2 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors cursor-pointer"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -93,7 +105,12 @@ export function LandingNavbar() {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-b border-[var(--border-subtle)] bg-[var(--bg-surface)] px-4 py-5 space-y-4 shadow-xl">
+        <div
+          id="mobile-navigation"
+          role="region"
+          aria-label="Mobile Navigation Drawer"
+          className="md:hidden border-b border-[var(--border-subtle)] bg-[var(--bg-surface)] px-4 py-5 space-y-4 shadow-xl"
+        >
           <Link
             href="/portfolio"
             onClick={() => setMobileMenuOpen(false)}

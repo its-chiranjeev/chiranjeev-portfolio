@@ -39,9 +39,9 @@ export function LandingHighlights() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between mb-8 pb-3 border-b border-[var(--border-subtle)]">
           <div className="flex items-center gap-2">
-            <span className="font-mono text-xs uppercase tracking-wider text-[var(--text-tertiary)] font-semibold">
+            <h2 className="font-mono text-xs uppercase tracking-wider text-[var(--text-tertiary)] font-semibold">
               Core Capabilities Overview
-            </span>
+            </h2>
           </div>
           <Link
             href="/portfolio#skills"
@@ -68,9 +68,9 @@ export function LandingHighlights() {
                       {item.tag}
                     </span>
                   </div>
-                  <h2 className="text-base font-semibold text-[var(--text-primary)] mb-1.5">
+                  <h3 className="text-base font-semibold text-[var(--text-primary)] mb-1.5">
                     {item.title}
-                  </h2>
+                  </h3>
                   <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed">
                     {item.description}
                   </p>
