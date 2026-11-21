@@ -32,7 +32,7 @@ export function ExperienceSection({ experiences }: ExperienceSectionProps) {
                 {/* Header Strip */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[var(--border-subtle)] pb-4 mb-5">
                   <div>
-                    <div className="flex items-center gap-2 mb-1">
+                    <div className="flex flex-wrap items-center gap-2 mb-1">
                       <h3 className="text-lg font-bold text-[var(--text-primary)]">
                         {exp.role}
                       </h3>

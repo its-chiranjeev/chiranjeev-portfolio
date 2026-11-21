@@ -28,7 +28,7 @@ export function PortfolioHero({
       <Container className="relative">
         <div className="max-w-3xl">
           {/* Status and Session Tag */}
-          <div className="flex items-center gap-3 mb-6">
+          <div className="flex flex-wrap items-center gap-3 mb-6">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[var(--border-subtle)] bg-[var(--bg-surface)] text-xs font-mono text-[var(--text-secondary)]">
               <Terminal className="w-3.5 h-3.5 text-[var(--accent-lime)]" />
               <span>portfolio.main_view</span>

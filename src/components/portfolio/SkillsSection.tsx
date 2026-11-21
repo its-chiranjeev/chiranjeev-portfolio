@@ -71,7 +71,7 @@ export function SkillsSection({ categories }: SkillsSectionProps) {
 
         {/* Legend */}
         <div className="mt-8 pt-4 border-t border-[var(--border-subtle)] flex flex-wrap items-center justify-between text-xs font-mono text-[var(--text-tertiary)] gap-4">
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center gap-4">
             <span className="flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-[var(--accent-lime)]" />
               <span>Core: Daily production focus</span>
