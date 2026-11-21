@@ -5,19 +5,25 @@ import { LandingFooter } from "@/components/layout/LandingFooter";
 import { getSiteConfig } from "@/lib/content";
 import type { Metadata } from "next";
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+
 export const metadata: Metadata = {
   title: "Chiranjeev Rastogi | Node.js Backend Developer",
   description:
     "Welcome to the official developer portfolio of Chiranjeev Rastogi — Node.js Backend Developer specializing in NestJS, TypeScript, PostgreSQL, TypeORM, and distributed REST API systems.",
-  alternates: {
-    canonical: "/",
-  },
-  openGraph: {
-    title: "Chiranjeev Rastogi | Node.js Backend Developer",
-    description:
-      "Welcome to the official developer portfolio of Chiranjeev Rastogi — Node.js Backend Developer specializing in NestJS, TypeScript, PostgreSQL, and scalable API systems.",
-    url: "/",
-  },
+  ...(siteUrl
+    ? {
+        alternates: {
+          canonical: siteUrl,
+        },
+        openGraph: {
+          title: "Chiranjeev Rastogi | Node.js Backend Developer",
+          description:
+            "Welcome to the official developer portfolio of Chiranjeev Rastogi — Node.js Backend Developer specializing in NestJS, TypeScript, PostgreSQL, and scalable API systems.",
+          url: siteUrl,
+        },
+      }
+    : {}),
 };
 
 export default function WelcomePage() {

@@ -17,19 +17,25 @@ import {
 import { getAllProjects } from "@/lib/projects";
 import type { Metadata } from "next";
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+
 export const metadata: Metadata = {
   title: "Main Portfolio",
   description:
     "Explore the full engineering portfolio of Chiranjeev Rastogi: Node.js, NestJS, and PostgreSQL case studies, technical skills taxonomy, internship experience, and education.",
-  alternates: {
-    canonical: "/portfolio",
-  },
-  openGraph: {
-    title: "Main Portfolio | Chiranjeev Rastogi",
-    description:
-      "Explore the full engineering portfolio of Chiranjeev Rastogi: Node.js, NestJS, and PostgreSQL case studies, technical skills taxonomy, internship experience, and education.",
-    url: "/portfolio",
-  },
+  ...(siteUrl
+    ? {
+        alternates: {
+          canonical: `${siteUrl}/portfolio`,
+        },
+        openGraph: {
+          title: "Main Portfolio | Chiranjeev Rastogi",
+          description:
+            "Explore the full engineering portfolio of Chiranjeev Rastogi: Node.js, NestJS, and PostgreSQL case studies, technical skills taxonomy, internship experience, and education.",
+          url: `${siteUrl}/portfolio`,
+        },
+      }
+    : {}),
   twitter: {
     card: "summary_large_image",
     title: "Main Portfolio | Chiranjeev Rastogi",

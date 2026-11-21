@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: siteUrl || "/",
+    ...(siteUrl ? { url: siteUrl } : {}),
     siteName: "Chiranjeev Rastogi Portfolio",
     title: "Chiranjeev Rastogi | Node.js Backend Developer",
     description:

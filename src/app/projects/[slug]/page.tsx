@@ -31,17 +31,23 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+
   return {
     title: `${project.title} — Technical Case Study | Chiranjeev Rastogi`,
     description: `${project.tagline}. ${project.shortDescription}`,
-    alternates: {
-      canonical: `/projects/${project.slug}`,
-    },
+    ...(siteUrl
+      ? {
+          alternates: {
+            canonical: `${siteUrl}/projects/${project.slug}`,
+          },
+        }
+      : {}),
     openGraph: {
       title: `${project.title} — Technical Case Study | Chiranjeev Rastogi`,
       description: project.shortDescription,
       type: "article",
-      url: `/projects/${project.slug}`,
+      ...(siteUrl ? { url: `${siteUrl}/projects/${project.slug}` } : {}),
     },
     twitter: {
       card: "summary_large_image",
