@@ -5,7 +5,7 @@ import { GithubIcon, LinkedinIcon } from "@/components/ui/icons";
 import { Menu, X, ArrowLeft, FileText } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const NAV_LINKS = [
   { label: "About", href: "#about" },
@@ -18,12 +18,14 @@ const NAV_LINKS = [
 
 export function PortfolioNavbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (!mobileMenuOpen) return;
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         setMobileMenuOpen(false);
+        menuButtonRef.current?.focus();
       }
     };
     window.addEventListener("keydown", handleKeyDown);
@@ -115,6 +117,7 @@ export function PortfolioNavbar() {
         <div className="flex sm:hidden items-center gap-2">
           <ThemeToggle />
           <button
+            ref={menuButtonRef}
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}

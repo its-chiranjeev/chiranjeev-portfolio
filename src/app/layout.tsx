@@ -15,7 +15,7 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://chiranjeev.dev";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 
 export const metadata: Metadata = {
   title: {
@@ -24,9 +24,9 @@ export const metadata: Metadata = {
   },
   description:
     "Portfolio of Chiranjeev Rastogi — Node.js Backend Developer specializing in NestJS, TypeScript, PostgreSQL, and scalable REST API architectures.",
-  authors: [{ name: "Chiranjeev Rastogi", url: SITE_URL }],
+  authors: [{ name: "Chiranjeev Rastogi", url: siteUrl || undefined }],
   creator: "Chiranjeev Rastogi",
-  metadataBase: new URL(SITE_URL),
+  metadataBase: siteUrl ? new URL(siteUrl) : undefined,
   robots: {
     index: true,
     follow: true,
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: SITE_URL,
+    url: siteUrl || "/",
     siteName: "Chiranjeev Rastogi Portfolio",
     title: "Chiranjeev Rastogi | Node.js Backend Developer",
     description:
@@ -93,7 +93,7 @@ const jsonLd = {
   "@type": "Person",
   name: "Chiranjeev Rastogi",
   jobTitle: "Node.js Backend Developer",
-  url: SITE_URL,
+  ...(siteUrl ? { url: siteUrl } : {}),
   sameAs: [
     "https://github.com/its-chiranjeev",
     "https://linkedin.com/in/chiranjeev-rastogi",
