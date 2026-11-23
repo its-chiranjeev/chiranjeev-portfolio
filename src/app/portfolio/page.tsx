@@ -14,7 +14,7 @@ import {
   getExperience,
   getSiteConfig,
 } from "@/lib/content";
-import { getAllProjects } from "@/lib/projects";
+import { getFeaturedProjects } from "@/lib/projects";
 import { getAbsoluteUrl } from "@/lib/env";
 import type { Metadata } from "next";
 
@@ -59,7 +59,7 @@ export default function PortfolioPage() {
   const site = getSiteConfig();
   const skills = getAllSkills();
   const experiences = getExperience();
-  const projects = getAllProjects();
+  const projects = getFeaturedProjects();
   const education = getEducation();
   const certifications = getCertifications();
 
