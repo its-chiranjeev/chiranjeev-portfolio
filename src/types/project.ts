@@ -108,6 +108,7 @@ export interface ProjectCaseStudy {
   title: string;
   tagline: string;
   shortDescription: string;
+  fullDescription?: string;
   category: ProjectCategory;
   role: string;
   organization?: string;
@@ -117,10 +118,16 @@ export interface ProjectCaseStudy {
   published: boolean;
   order: number;
   techStack: TechItem[];
+  technologies?: string[];
+  responsibilities?: string[];
+  challenges?: string[];
+  solutions?: string[];
+  architecture?: string;
   githubUrl?: string;
   liveUrl?: string;
   thumbnail?: string;
   coverImage?: string;
   coverImageAlt?: string;
+  gallery?: string[];
   sections: CaseStudySection[];
 }

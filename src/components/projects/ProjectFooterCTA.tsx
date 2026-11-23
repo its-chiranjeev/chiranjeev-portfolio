@@ -43,7 +43,7 @@ export function ProjectFooterCTA() {
           </Button>
 
           <Button
-            href="/portfolio#projects"
+            href="/projects"
             variant="outline"
             size="md"
             className="font-mono text-xs"

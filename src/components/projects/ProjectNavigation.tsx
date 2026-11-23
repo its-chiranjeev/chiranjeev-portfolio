@@ -15,7 +15,7 @@ export function ProjectNavigation({ prev, next }: ProjectNavigationProps) {
           Case Study Navigation
         </span>
         <Link
-          href="/portfolio#projects"
+          href="/projects"
           className="inline-flex items-center gap-1.5 text-xs font-mono text-[var(--text-secondary)] hover:text-[var(--accent-lime)] transition-colors"
         >
           <Grid className="w-3.5 h-3.5" />

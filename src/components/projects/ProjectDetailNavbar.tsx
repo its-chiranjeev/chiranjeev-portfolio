@@ -17,7 +17,7 @@ export function ProjectDetailNavbar({ projectTitle }: ProjectDetailNavbarProps) 
         {/* Left: Breadcrumbs navigation */}
         <div className="flex items-center gap-2 min-w-0">
           <Link
-            href="/portfolio#projects"
+            href="/projects"
             className="flex items-center gap-1.5 text-xs font-mono text-[var(--text-secondary)] hover:text-[var(--accent-lime)] transition-colors shrink-0"
             title="Return to Projects list"
           >
