@@ -34,6 +34,15 @@ export const metadata: Metadata = {
           description:
             "Explore the full engineering portfolio of Chiranjeev Rastogi: Node.js, NestJS, and PostgreSQL case studies, technical skills taxonomy, internship experience, and education.",
           url: canonicalUrl,
+          images: [
+            {
+              url: "/images/og-image-v2.png",
+              width: 1200,
+              height: 630,
+              type: "image/png",
+              alt: "Chiranjeev Rastogi — Main Portfolio",
+            },
+          ],
         },
       }
     : {}),
@@ -42,6 +51,7 @@ export const metadata: Metadata = {
     title: "Main Portfolio | Chiranjeev Rastogi",
     description:
       "Explore the full engineering portfolio of Chiranjeev Rastogi: Node.js, NestJS, and PostgreSQL case studies, technical skills taxonomy, internship experience, and education.",
+    images: ["/images/og-image-v2.png"],
   },
 };
 

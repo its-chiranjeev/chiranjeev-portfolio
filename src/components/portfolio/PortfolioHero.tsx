@@ -324,7 +324,7 @@ export function PortfolioHero({
               className="w-[240px] sm:w-[300px] lg:w-[350px] xl:w-[390px] h-[340px] sm:h-[420px] lg:h-[470px] xl:h-[510px] shrink-0 relative rounded-2xl overflow-hidden border border-[var(--border-subtle)] bg-[var(--bg-surface)] shadow-2xl group will-change-transform"
             >
               <Image
-                src="/images/chiranjeev-portrait.jpg"
+                src="/images/avatar.jpg"
                 alt={name}
                 fill
                 priority

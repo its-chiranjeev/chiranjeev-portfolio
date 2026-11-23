@@ -52,9 +52,10 @@ export const metadata: Metadata = {
       "Software Engineer building scalable backend systems, distributed architectures, and modern web applications with Node.js, NestJS, and TypeScript.",
     images: [
       {
-        url: "/images/og-image.png",
+        url: "/images/og-image-v2.png",
         width: 1200,
         height: 630,
+        type: "image/png",
         alt: `${site.name} — Personal Brand Identity (CR Monogram)`,
       },
     ],
@@ -64,7 +65,7 @@ export const metadata: Metadata = {
     title: `${site.name} — Software Engineer`,
     description:
       "Software Engineer building scalable backend systems, distributed architectures, and modern web applications with Node.js, NestJS, and TypeScript.",
-    images: ["/images/og-image.png"],
+    images: ["/images/og-image-v2.png"],
   },
   icons: {
     icon: [
@@ -102,7 +103,7 @@ const jsonLd = {
   ...(siteUrl
     ? {
         url: siteUrl,
-        image: `${siteUrl}/images/og-image.png`,
+        image: `${siteUrl}/images/avatar.jpg`,
       }
     : {}),
   sameAs: [

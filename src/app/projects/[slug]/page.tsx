@@ -51,7 +51,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       ...(canonicalUrl ? { url: canonicalUrl } : {}),
       images: [
         {
-          url: project.coverImage || project.thumbnail || "/images/og-image.png",
+          url: project.coverImage || project.thumbnail || "/images/og-image-v2.png",
           width: 2560,
           height: 1440,
           alt: project.coverImageAlt || `${project.title} Cover`,
@@ -62,7 +62,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       card: "summary_large_image",
       title: `${project.title} — Technical Case Study | Chiranjeev Rastogi`,
       description: project.shortDescription,
-      images: [project.coverImage || project.thumbnail || "/images/og-image.png"],
+      images: [project.coverImage || project.thumbnail || "/images/og-image-v2.png"],
     },
   };
 }
