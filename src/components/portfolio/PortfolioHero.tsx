@@ -102,10 +102,7 @@ export function PortfolioHero({
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     if (mediaQuery.matches) {
       // Respect accessibility: Leave layout in static settled position
-      if (rightContentRef.current) {
-        rightContentRef.current.style.opacity = "1";
-        rightContentRef.current.style.pointerEvents = "auto";
-      }
+      gsap.set([portraitWrapperRef.current, rightContentRef.current], { clearProps: "all" });
       return;
     }
 
@@ -118,28 +115,24 @@ export function PortfolioHero({
 
     if (!sectionEl || !pinStageEl || !portraitEl || !rightContentEl) return;
 
-    const ctx = gsap.context(() => {
-      const isDesktop = window.innerWidth >= 1024;
+    const mm = gsap.matchMedia();
 
+    // 1. DESKTOP ANIMATION (>= 1024px): Immersive scrubbed cinematic pinning timeline
+    mm.add("(min-width: 1024px)", () => {
       // Compute geometric offsets for smooth cinematic centering at 0%
       const containerRect = pinStageEl.getBoundingClientRect();
       const portraitRect = portraitEl.getBoundingClientRect();
 
-      let deltaX = 0;
-      const deltaY = isDesktop ? 48 : 24; // Head appears lower initially matching downward gaze
+      const stageCenterX = containerRect.width / 2;
+      const portraitCenterX = (portraitRect.left - containerRect.left) + portraitRect.width / 2;
+      const deltaX = stageCenterX - portraitCenterX;
+      const deltaY = 48; // Head appears lower initially matching downward gaze
+      const initialScale = 1.16;
+      const scrollDistance = 1300;
 
-      if (isDesktop) {
-        const stageCenterX = containerRect.width / 2;
-        const portraitCenterX = (portraitRect.left - containerRect.left) + portraitRect.width / 2;
-        deltaX = stageCenterX - portraitCenterX;
-      }
-
-      const initialScale = isDesktop ? 1.16 : 1.05;
-      const scrollDistance = isDesktop ? 1300 : 700;
-
-      // Initial visual setup for scroll 0%
+      // Initial visual setup for scroll 0% managed entirely by GSAP
       gsap.set(portraitEl, { x: deltaX, y: deltaY, scale: initialScale });
-      gsap.set(rightContentEl, { opacity: 0, y: 35 });
+      gsap.set(rightContentEl, { opacity: 0, y: 35, pointerEvents: "none" });
       if (initialMetaEl) gsap.set(initialMetaEl, { opacity: 1, y: 0 });
       if (watermarkEl) gsap.set(watermarkEl, { opacity: 0.05, scale: 1 });
 
@@ -153,13 +146,11 @@ export function PortfolioHero({
           scrub: 0.8,
           anticipatePin: 1,
           invalidateOnRefresh: true,
-          onUpdate: (self) => {
-            if (rightContentEl) {
-              rightContentEl.style.pointerEvents = self.progress > 0.72 ? "auto" : "none";
-            }
-          },
         },
       });
+
+      // Pointer events enabled automatically at 72% scroll progression (reverses on backward scrub)
+      tl.set(rightContentEl, { pointerEvents: "auto" }, 0.72);
 
       // Stage 1 (0% -> 25%):
       // - Portrait begins moving upward
@@ -190,7 +181,7 @@ export function PortfolioHero({
         portraitEl,
         {
           x: deltaX * 0.35,
-          y: isDesktop ? 12 : 8,
+          y: 12,
           scale: 1.03,
           duration: 0.25,
           ease: "power1.inOut",
@@ -257,17 +248,25 @@ export function PortfolioHero({
         },
         0.75
       );
-    }, sectionEl);
+    });
+
+    // 2. MOBILE / TABLET (< 1024px): Natural document flow, zero horizontal displacement, 100% stable visibility
+    mm.add("(max-width: 1023px)", () => {
+      // Clear all GSAP inline styles to restore natural document flow and full visibility
+      gsap.set([portraitEl, rightContentEl], { clearProps: "all" });
+      if (initialMetaEl) gsap.set(initialMetaEl, { clearProps: "all" });
+      if (watermarkEl) gsap.set(watermarkEl, { clearProps: "all" });
+    });
 
     return () => {
-      ctx.revert();
+      mm.revert();
     };
   }, []);
 
   return (
     <section
       ref={sectionRef}
-      className="relative border-b border-[var(--border-subtle)] bg-[var(--bg-canvas)]"
+      className="relative border-b border-[var(--border-subtle)] bg-[var(--bg-canvas)] overflow-x-clip"
     >
       {/* Background subtle radial ambient glow */}
       <div
@@ -278,15 +277,15 @@ export function PortfolioHero({
         }}
       />
 
-      {/* Pinned Stage Window */}
+      {/* Pinned Stage Window on Desktop / Naturally Flowing Hero on Mobile */}
       <div
         ref={pinStageRef}
-        className="relative w-full h-[calc(100dvh-4rem)] min-h-[580px] max-h-[960px] overflow-hidden flex flex-col justify-center"
+        className="relative w-full py-10 sm:py-14 lg:py-0 lg:h-[calc(100dvh-4rem)] lg:min-h-[580px] lg:max-h-[960px] lg:overflow-hidden flex flex-col justify-center"
       >
-        {/* Stage 0 Watermark / Editorial Background Typography */}
+        {/* Stage 0 Watermark / Editorial Background Typography (Desktop only) */}
         <div
           ref={watermarkRef}
-          className="absolute inset-0 flex flex-col justify-center items-center pointer-events-none select-none z-0"
+          className="absolute inset-0 hidden lg:flex flex-col justify-center items-center pointer-events-none select-none z-0"
         >
           <div className="font-extrabold text-[13vw] sm:text-[11vw] lg:text-[9.5vw] leading-[0.88] tracking-tight uppercase text-white/[0.04] text-center font-sans">
             CHIRANJEEV
@@ -296,10 +295,10 @@ export function PortfolioHero({
           </div>
         </div>
 
-        {/* Initial View Floating Metadata & Scroll Cue */}
+        {/* Initial View Floating Metadata & Scroll Cue (Desktop only) */}
         <div
           ref={initialMetaRef}
-          className="absolute bottom-5 sm:bottom-8 inset-x-4 sm:inset-x-8 flex items-center justify-between z-20 pointer-events-none"
+          className="absolute bottom-5 sm:bottom-8 inset-x-4 sm:inset-x-8 hidden lg:flex items-center justify-between z-20 pointer-events-none"
         >
           <div className="flex items-center gap-2.5 font-mono text-xs text-[var(--text-tertiary)] bg-[var(--bg-surface)]/80 backdrop-blur-md px-3 py-1.5 rounded-full border border-[var(--border-subtle)]">
             <span className="w-2 h-2 rounded-full bg-[var(--accent-lime)] animate-pulse" />
@@ -316,19 +315,19 @@ export function PortfolioHero({
 
         {/* Main Hero Container */}
         <Container className="relative z-10 w-full">
-          <div className="flex flex-col lg:flex-row items-center lg:items-center justify-between gap-6 xl:gap-14">
+          <div className="flex flex-col lg:flex-row items-center lg:items-center justify-between gap-6 sm:gap-8 lg:gap-10 xl:gap-14">
 
             {/* LEFT: Portrait Card */}
             <div
               ref={portraitWrapperRef}
-              className="w-[240px] sm:w-[300px] lg:w-[350px] xl:w-[390px] h-[340px] sm:h-[420px] lg:h-[470px] xl:h-[510px] shrink-0 relative rounded-2xl overflow-hidden border border-[var(--border-subtle)] bg-[var(--bg-surface)] shadow-2xl group will-change-transform"
+              className="w-[200px] sm:w-[240px] lg:w-[350px] xl:w-[390px] h-[260px] sm:h-[310px] lg:h-[470px] xl:h-[510px] shrink-0 relative rounded-2xl overflow-hidden border border-[var(--border-subtle)] bg-[var(--bg-surface)] shadow-2xl group will-change-transform"
             >
               <Image
                 src="/images/avatar.jpg"
                 alt={name}
                 fill
                 priority
-                sizes="(max-width: 640px) 240px, (max-width: 1024px) 300px, 390px"
+                sizes="(max-width: 640px) 200px, (max-width: 1024px) 240px, 390px"
                 className="object-cover object-top filter grayscale contrast-[112%] brightness-[94%] transition-all duration-500 group-hover:contrast-[118%]"
               />
 
@@ -351,10 +350,10 @@ export function PortfolioHero({
             {/* RIGHT: Content Section */}
             <div
               ref={rightContentRef}
-              className="flex-1 min-w-0 will-change-transform"
+              className="flex-1 min-w-0 w-full will-change-transform text-center lg:text-left"
             >
               {/* Session Tag */}
-              <div className="flex flex-wrap items-center gap-3 mb-3.5">
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5 sm:gap-3 mb-3 sm:mb-3.5">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[var(--border-subtle)] bg-[var(--bg-surface)] text-xs font-mono text-[var(--text-secondary)]">
                   <Terminal className="w-3.5 h-3.5 text-[var(--accent-lime)]" />
                   <span>portfolio.main_view</span>
@@ -363,13 +362,13 @@ export function PortfolioHero({
               </div>
 
               {/* Headline */}
-              <h1 className="text-3xl sm:text-4xl xl:text-5xl font-extrabold tracking-tight text-[var(--text-primary)] mb-2 font-sans">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl xl:text-5xl font-extrabold tracking-tight text-[var(--text-primary)] mb-2 font-sans">
                 {name}
               </h1>
 
               {/* Animated Two-Part Professional Title */}
               <div
-                className="font-mono text-lg sm:text-xl xl:text-2xl font-bold mb-2.5 flex items-center flex-wrap gap-x-2 text-[var(--text-primary)]"
+                className="font-mono text-base sm:text-xl xl:text-2xl font-bold mb-2.5 flex items-center justify-center lg:justify-start flex-wrap gap-x-2 text-[var(--text-primary)]"
                 aria-live="polite"
               >
                 <span className="shrink-0 text-[var(--text-secondary)]">I&apos;m a</span>
@@ -392,7 +391,7 @@ export function PortfolioHero({
               </div>
 
               {/* Subtitle / Domain Focus & Location */}
-              <div className="font-mono text-xs sm:text-sm text-[var(--text-secondary)] mb-4 flex flex-wrap items-center gap-x-2 gap-y-1">
+              <div className="font-mono text-xs sm:text-sm text-[var(--text-secondary)] mb-3.5 sm:mb-4 flex flex-wrap items-center justify-center lg:justify-start gap-x-2 gap-y-1">
                 <span className="text-[var(--text-primary)] font-medium">Backend Development &bull; Distributed Systems</span>
                 <span className="text-[var(--text-tertiary)]">&bull;</span>
                 <span className="flex items-center gap-1 text-[var(--text-tertiary)]">
@@ -402,12 +401,12 @@ export function PortfolioHero({
               </div>
 
               {/* Value Proposition */}
-              <p className="text-xs sm:text-sm xl:text-base text-[var(--text-secondary)] leading-relaxed mb-5 max-w-xl">
+              <p className="text-xs sm:text-sm xl:text-base text-[var(--text-secondary)] leading-relaxed mb-5 max-w-xl mx-auto lg:mx-0">
                 Specializing in architecting modular REST microservices, transactional state machines, and relational database systems using <span className="text-[var(--text-primary)] font-medium">Node.js, NestJS, TypeScript,</span> and <span className="text-[var(--text-primary)] font-medium">PostgreSQL</span>. Experienced in shipping production-style internship platforms and verifiable open-source backend services.
               </p>
 
               {/* Spec Tags */}
-              <div className="flex flex-wrap items-center gap-2 mb-6">
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 mb-5 sm:mb-6">
                 <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[var(--bg-surface-elevated)] border border-[var(--border-subtle)] text-[11px] font-mono text-[var(--text-secondary)]">
                   <Server className="w-3 h-3 text-[var(--accent-lime)]" />
                   <span>NestJS Microservices</span>
@@ -423,7 +422,7 @@ export function PortfolioHero({
               </div>
 
               {/* Action CTAs */}
-              <div className="flex flex-wrap items-center gap-3">
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5 sm:gap-3">
                 <Button
                   href="#projects"
                   variant="primary"
