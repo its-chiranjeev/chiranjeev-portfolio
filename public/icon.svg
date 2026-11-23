@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <rect width="48" height="48" rx="11" fill="#121216" stroke="#272730" stroke-width="1.5"/>
+  <!-- C -->
+  <path d="M22 14.5H16C13.2386 14.5 11 16.7386 11 19.5V28.5C11 31.2614 13.2386 33.5 16 33.5H22" stroke="#F4F4F6" stroke-width="3.5" stroke-linecap="round"/>
+  <!-- R Stem & Bowl -->
+  <path d="M26 33.5V14.5H32C34.7614 14.5 37 16.7386 37 19.5C37 22.2614 34.7614 24.5 32 24.5H26" stroke="#F4F4F6" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- R Leg (Lime Accent: #A3E635) -->
+  <path d="M31.5 24.5L37.5 33.5" stroke="#A3E635" stroke-width="3.5" stroke-linecap="round"/>
+  <!-- Terminal Accent Dot -->
+  <circle cx="21.5" cy="24" r="1.5" fill="#A3E635"/>
+</svg>

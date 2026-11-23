@@ -158,6 +158,20 @@ export function ProjectDetailHero({ project }: ProjectDetailHeroProps) {
             )}
           </div>
         )}
+
+        {/* Project Detail Cover Image */}
+        {(project.coverImage || project.thumbnail) && (
+          <div className="mt-8 rounded-2xl overflow-hidden border border-[var(--border-subtle)] bg-[var(--bg-surface)] shadow-2xl relative aspect-video w-full">
+            <Image
+              src={project.coverImage || project.thumbnail!}
+              alt={project.coverImageAlt || `${project.title} Cover`}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
+              className="object-cover object-center"
+              priority
+            />
+          </div>
+        )}
       </Container>
     </section>
   );

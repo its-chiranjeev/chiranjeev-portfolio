@@ -30,6 +30,25 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
               key={project.slug}
               className="p-6 sm:p-8 bg-[var(--bg-surface)] hover:border-[var(--border-strong)] transition-all relative overflow-hidden group"
             >
+              {/* Project Card Cover Image */}
+              {(project.coverImage || project.thumbnail) && (
+                <Link
+                  href={`/projects/${project.slug}`}
+                  className="block relative w-full aspect-video rounded-xl overflow-hidden mb-6 border border-[var(--border-subtle)] bg-[var(--bg-surface-elevated)] group-hover:border-[var(--accent-lime)]/40 transition-colors"
+                  tabIndex={-1}
+                  aria-hidden="true"
+                >
+                  <Image
+                    src={project.coverImage || project.thumbnail!}
+                    alt={project.coverImageAlt || `${project.title} Cover`}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1100px"
+                    className="object-cover object-center group-hover:scale-[1.015] transition-transform duration-300"
+                    priority={project.order === 1}
+                  />
+                </Link>
+              )}
+
               <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-6">
                 {/* Left: Main Details */}
                 <div className="flex-1">

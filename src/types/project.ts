@@ -120,5 +120,7 @@ export interface ProjectCaseStudy {
   githubUrl?: string;
   liveUrl?: string;
   thumbnail?: string;
+  coverImage?: string;
+  coverImageAlt?: string;
   sections: CaseStudySection[];
 }

@@ -2,8 +2,8 @@
 
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/icons";
+import { CRMonogramSvg } from "@/components/brand/CRLogo";
 import { ArrowLeft, ChevronRight, FileText } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 
 interface ProjectDetailNavbarProps {
@@ -29,15 +29,14 @@ export function ProjectDetailNavbar({ projectTitle }: ProjectDetailNavbarProps) 
             <ChevronRight className="w-3.5 h-3.5" />
           </span>
 
-          <Link href="/portfolio" className="items-center gap-2 group hidden md:flex shrink-0">
-            <div className="w-6 h-6 rounded overflow-hidden border border-[var(--border-subtle)] bg-[var(--bg-surface-elevated)] flex items-center justify-center p-0.5 group-hover:border-[var(--accent-lime)] transition-colors">
-              <Image
-                src="/images/logo.png"
-                alt="Logo"
-                width={20}
-                height={20}
-                className="object-contain"
-              />
+          <Link
+            href="/portfolio"
+            className="items-center gap-2 group hidden md:flex shrink-0"
+            title="Return to Portfolio"
+            aria-label="Return to Portfolio"
+          >
+            <div className="rounded overflow-hidden border border-[var(--border-subtle)] bg-[var(--bg-surface-elevated)] flex items-center justify-center p-1 group-hover:border-[var(--accent-lime)] transition-colors">
+              <CRMonogramSvg size={18} />
             </div>
           </Link>
 

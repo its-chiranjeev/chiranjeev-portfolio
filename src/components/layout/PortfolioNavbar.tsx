@@ -2,9 +2,8 @@
 
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/icons";
+import { CRLogo } from "@/components/brand/CRLogo";
 import { Menu, X, FileText } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 const NAV_LINKS = [
@@ -35,23 +34,9 @@ export function PortfolioNavbar() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-[var(--border-subtle)] bg-[var(--bg-canvas)]/85 backdrop-blur-md">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        {/* Left: Brand */}
+        {/* Left: Brand Identity */}
         <div className="flex items-center gap-4">
-          <Link href="/portfolio" className="flex items-center gap-2.5 group">
-            <div className="w-7 h-7 rounded-md overflow-hidden border border-[var(--border-subtle)] bg-[var(--bg-surface-elevated)] flex items-center justify-center p-0.5 group-hover:border-[var(--accent-lime)] transition-colors">
-              <Image
-                src="/images/logo.png"
-                alt="Logo"
-                width={24}
-                height={24}
-                className="object-contain"
-                priority
-              />
-            </div>
-            <span className="font-semibold text-sm tracking-tight text-[var(--text-primary)]">
-              Chiranjeev Rastogi
-            </span>
-          </Link>
+          <CRLogo variant="navbar" href="/portfolio" size={24} />
         </div>
 
         {/* Center: Desktop Section Anchors */}

@@ -22,14 +22,15 @@ const siteUrl = env.siteUrl;
 
 export const metadata: Metadata = {
   title: {
-    default: `${site.name} | ${site.title}`,
+    default: `${site.name} — Software Engineer & Full-Stack Developer`,
     template: `%s | ${site.name}`,
   },
   description:
-    "Portfolio of Chiranjeev Rastogi — Node.js Backend Developer specializing in NestJS, TypeScript, PostgreSQL, and scalable REST API architectures.",
+    "Portfolio of Chiranjeev Rastogi — Software Engineer specializing in scalable backend architectures, distributed systems, and modular web applications with Node.js, NestJS, and TypeScript.",
+  applicationName: "Chiranjeev Rastogi Portfolio",
   authors: [{ name: site.name, url: siteUrl || undefined }],
   creator: site.name,
-  metadataBase: siteUrl ? new URL(siteUrl) : undefined,
+  metadataBase: new URL(siteUrl || "http://localhost:3000"),
   robots: {
     index: true,
     follow: true,
@@ -46,31 +47,33 @@ export const metadata: Metadata = {
     locale: "en_US",
     ...(siteUrl ? { url: siteUrl } : {}),
     siteName: `${site.name} Portfolio`,
-    title: `${site.name} | ${site.title}`,
+    title: `${site.name} — Software Engineer`,
     description:
-      "Node.js Backend Developer specializing in NestJS, TypeScript, PostgreSQL, and scalable REST API architectures.",
+      "Software Engineer building scalable backend systems, distributed architectures, and modern web applications with Node.js, NestJS, and TypeScript.",
     images: [
       {
-        url: "/images/logo.png",
-        width: 800,
-        height: 800,
-        alt: `${site.name} — ${site.title} Logo`,
+        url: "/images/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: `${site.name} — Personal Brand Identity (CR Monogram)`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} | ${site.title}`,
+    title: `${site.name} — Software Engineer`,
     description:
-      "Node.js Backend Developer specializing in NestJS, TypeScript, PostgreSQL, and scalable REST API architectures.",
-    images: ["/images/logo.png"],
+      "Software Engineer building scalable backend systems, distributed architectures, and modern web applications with Node.js, NestJS, and TypeScript.",
+    images: ["/images/og-image.png"],
   },
   icons: {
     icon: [
-      { url: "/images/logo.png" },
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "32x32" },
+      { url: "/icon-32x32.png", sizes: "32x32", type: "image/png" },
     ],
     apple: [
-      { url: "/images/logo.png" },
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
     ],
   },
 };
@@ -96,7 +99,12 @@ const jsonLd = {
   "@type": "Person",
   name: site.name,
   jobTitle: site.title,
-  ...(siteUrl ? { url: siteUrl } : {}),
+  ...(siteUrl
+    ? {
+        url: siteUrl,
+        image: `${siteUrl}/images/og-image.png`,
+      }
+    : {}),
   sameAs: [
     site.socials.github,
     site.socials.linkedin,

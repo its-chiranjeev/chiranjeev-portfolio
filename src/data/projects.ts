@@ -17,6 +17,10 @@ export const projectsData: ProjectCaseStudy[] = [
     order: 1,
     githubUrl: "https://github.com/its-chiranjeev/poojawala",
     liveUrl: "https://1pooja.com/",
+    thumbnail: "/images/projects/poojawala-cover.webp",
+    coverImage: "/images/projects/poojawala-cover.webp",
+    coverImageAlt:
+      "Illustrated cover for Poojawala: a glowing traditional Indian temple with a diya in the foreground and floating booking calendar, payment card and booking-confirmation panels.",
     techStack: [
       { name: "NestJS", category: "Backend" },
       { name: "TypeScript", category: "Backend" },
@@ -192,6 +196,10 @@ export const projectsData: ProjectCaseStudy[] = [
     published: true,
     order: 2,
     githubUrl: "https://github.com/its-chiranjeev/HiChandra",
+    thumbnail: "/images/projects/hichandra-cover.webp",
+    coverImage: "/images/projects/hichandra-cover.webp",
+    coverImageAlt:
+      "Illustrated cover for HiChandra: an isometric home with a dispatch route and location pin, a service technician, and floating booking, job-alert, invoice and security panels in green.",
     techStack: [
       { name: "NestJS", category: "Backend" },
       { name: "TypeScript", category: "Backend" },
@@ -334,6 +342,10 @@ export const projectsData: ProjectCaseStudy[] = [
     published: true,
     order: 3,
     githubUrl: "https://github.com/its-chiranjeev/nestjs-url-shortener",
+    thumbnail: "/images/projects/nestjs-url-shortener-cover.webp",
+    coverImage: "/images/projects/nestjs-url-shortener-cover.webp",
+    coverImageAlt:
+      "Dark dashboard-style cover for a NestJS URL shortener: a long link transforming into a short link, with a QR code and click analytics charts.",
     techStack: [
       { name: "NestJS", category: "Backend" },
       { name: "TypeScript", category: "Backend" },

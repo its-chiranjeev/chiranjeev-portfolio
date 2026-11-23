@@ -5,6 +5,7 @@
 
 export interface EnvConfig {
   siteUrl: string | undefined;
+  web3formsAccessKey: string | undefined;
   nodeEnv: "development" | "production" | "test";
   isProduction: boolean;
   isDevelopment: boolean;
@@ -23,6 +24,7 @@ function sanitizeUrl(url: string | undefined): string | undefined {
 
 export const env: EnvConfig = {
   siteUrl: sanitizeUrl(process.env.NEXT_PUBLIC_SITE_URL),
+  web3formsAccessKey: process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY?.trim() || undefined,
   nodeEnv: (process.env.NODE_ENV as EnvConfig["nodeEnv"]) || "development",
   isProduction: process.env.NODE_ENV === "production",
   isDevelopment: process.env.NODE_ENV === "development",

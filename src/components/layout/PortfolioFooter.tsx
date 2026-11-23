@@ -1,5 +1,6 @@
 import { Container } from "@/components/ui/Container";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/icons";
+import { CRLogo } from "@/components/brand/CRLogo";
 import { ArrowUp } from "lucide-react";
 import Link from "next/link";
 
@@ -11,13 +12,16 @@ export function PortfolioFooter() {
       <Container>
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-[var(--border-subtle)]">
           {/* Left: Identity */}
-          <div className="text-center md:text-left">
-            <span className="font-semibold text-sm text-[var(--text-primary)] block mb-1">
-              Chiranjeev Rastogi
-            </span>
-            <p className="text-xs text-[var(--text-secondary)]">
-              Node.js Backend Developer &bull; Ghaziabad, Uttar Pradesh, India
-            </p>
+          <div className="flex flex-col sm:flex-row items-center sm:items-start md:items-center gap-3.5 text-center sm:text-left">
+            <CRLogo variant="monogram" size={32} withBadge />
+            <div>
+              <span className="font-semibold text-sm text-[var(--text-primary)] block">
+                Chiranjeev Rastogi
+              </span>
+              <p className="text-xs text-[var(--text-secondary)]">
+                Software Engineer &bull; Ghaziabad, Uttar Pradesh, India
+              </p>
+            </div>
           </div>
 
           {/* Center: In-page navigation */}

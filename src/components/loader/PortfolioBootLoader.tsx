@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { Terminal, CheckCircle2, SkipForward } from "lucide-react";
+import { CRLogo } from "@/components/brand/CRLogo";
 
 interface BootStep {
   id: string;
@@ -162,6 +163,9 @@ export function PortfolioBootLoader() {
 
       {/* Main Terminal Loader Card */}
       <div className="w-full max-w-lg mx-auto relative z-10 space-y-4">
+        {/* Prominent CR Brand Identity Reveal */}
+        <CRLogo variant="loader" size={56} className="mb-2" />
+
         <div className="rounded-2xl border border-[var(--border-subtle)] bg-[#0d0d12]/95 backdrop-blur-xl shadow-[0_0_60px_-15px_rgba(163,230,53,0.12)] overflow-hidden">
           {/* Top Terminal Bar */}
           <div className="px-4 py-3 bg-[#13131a] border-b border-[var(--border-subtle)] flex items-center justify-between gap-3">
