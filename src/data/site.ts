@@ -13,6 +13,9 @@ export const siteConfig: SiteConfig = {
     github: "https://github.com/its-chiranjeev",
     linkedin: "https://linkedin.com/in/chiranjeev-rastogi",
     email: "mailto:chiranjeevrastogi@gmail.com",
+    x: "https://x.com/chiranjeev846",
+    instagram: "https://www.instagram.com/its.chiranjeev/",
+    leetcode: "https://leetcode.com/u/its_chiranjeev11/",
   },
   navLinks: [
     { label: "Portfolio", href: "/portfolio" },

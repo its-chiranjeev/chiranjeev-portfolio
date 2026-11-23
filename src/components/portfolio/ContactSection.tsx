@@ -4,7 +4,7 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ContactForm } from "./ContactForm";
 import { CopyEmailButton } from "./CopyEmailButton";
-import { GithubIcon, LinkedinIcon } from "@/components/ui/icons";
+import { GithubIcon, LinkedinIcon, XIcon, InstagramIcon, LeetCodeIcon } from "@/components/ui/icons";
 import { SiteConfig } from "@/types/site";
 import { Clock, Mail, MapPin, Phone, Terminal } from "lucide-react";
 
@@ -141,7 +141,7 @@ export function ContactSection({ site }: ContactSectionProps) {
                     Social Channels:
                   </span>
 
-                  <div className="flex items-center gap-4">
+                  <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
                     <a
                       href={site.socials.github}
                       target="_blank"
@@ -160,6 +160,44 @@ export function ContactSection({ site }: ContactSectionProps) {
                     >
                       <LinkedinIcon className="w-4 h-4 text-[var(--accent-lime)]" />
                       <span>LinkedIn</span>
+                    </a>
+
+                    <a
+                      href={site.socials.email}
+                      className="inline-flex items-center gap-1.5 text-xs font-mono text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
+                    >
+                      <Mail className="w-4 h-4 text-[var(--accent-lime)]" />
+                      <span>Gmail</span>
+                    </a>
+
+                    <a
+                      href={site.socials.x}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-xs font-mono text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
+                    >
+                      <XIcon className="w-4 h-4 text-[var(--accent-lime)]" />
+                      <span>X</span>
+                    </a>
+
+                    <a
+                      href={site.socials.instagram}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-xs font-mono text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
+                    >
+                      <InstagramIcon className="w-4 h-4 text-[var(--accent-lime)]" />
+                      <span>Instagram</span>
+                    </a>
+
+                    <a
+                      href={site.socials.leetcode}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-xs font-mono text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
+                    >
+                      <LeetCodeIcon className="w-4 h-4 text-[var(--accent-lime)]" />
+                      <span>LeetCode</span>
                     </a>
                   </div>
                 </div>

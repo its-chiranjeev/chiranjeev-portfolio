@@ -7,6 +7,9 @@ export interface SocialLinks {
   github: string;
   linkedin: string;
   email: string;
+  x: string;
+  instagram: string;
+  leetcode: string;
 }
 
 export interface SiteConfig {

@@ -1,11 +1,13 @@
 import { Container } from "@/components/ui/Container";
-import { GithubIcon, LinkedinIcon } from "@/components/ui/icons";
+import { GithubIcon, LinkedinIcon, XIcon, InstagramIcon, LeetCodeIcon } from "@/components/ui/icons";
 import { CRLogo } from "@/components/brand/CRLogo";
-import { ArrowUp } from "lucide-react";
+import { ArrowUp, Mail } from "lucide-react";
 import Link from "next/link";
+import { getSiteConfig } from "@/lib/content";
 
 export function PortfolioFooter() {
   const currentYear = new Date().getFullYear();
+  const site = getSiteConfig();
 
   return (
     <footer className="border-t border-[var(--border-subtle)] bg-[var(--bg-canvas)] py-12 text-xs font-mono text-[var(--text-tertiary)]">
@@ -63,24 +65,58 @@ export function PortfolioFooter() {
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <span>&copy; {currentYear} Chiranjeev Rastogi. All rights reserved.</span>
 
-          <div className="flex items-center gap-4 text-[var(--text-secondary)]">
+          <div className="flex flex-wrap items-center justify-center gap-4 text-[var(--text-secondary)]">
             <a
-              href="https://github.com/its-chiranjeev"
+              href={site.socials.github}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="GitHub"
-              className="hover:text-[var(--text-primary)] transition-colors"
+              aria-label="GitHub Profile"
+              className="hover:text-[var(--text-primary)] transition-colors p-1"
             >
               <GithubIcon className="w-4 h-4" />
             </a>
             <a
-              href="https://linkedin.com/in/chiranjeev-rastogi"
+              href={site.socials.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="LinkedIn"
-              className="hover:text-[var(--text-primary)] transition-colors"
+              aria-label="LinkedIn Profile"
+              className="hover:text-[var(--text-primary)] transition-colors p-1"
             >
               <LinkedinIcon className="w-4 h-4" />
+            </a>
+            <a
+              href={site.socials.email}
+              aria-label="Send Email"
+              className="hover:text-[var(--text-primary)] transition-colors p-1"
+            >
+              <Mail className="w-4 h-4" />
+            </a>
+            <a
+              href={site.socials.x}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="X (formerly Twitter) Profile"
+              className="hover:text-[var(--text-primary)] transition-colors p-1"
+            >
+              <XIcon className="w-4 h-4" />
+            </a>
+            <a
+              href={site.socials.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram Profile"
+              className="hover:text-[var(--text-primary)] transition-colors p-1"
+            >
+              <InstagramIcon className="w-4 h-4" />
+            </a>
+            <a
+              href={site.socials.leetcode}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LeetCode Profile"
+              className="hover:text-[var(--text-primary)] transition-colors p-1"
+            >
+              <LeetCodeIcon className="w-4 h-4" />
             </a>
           </div>
         </div>

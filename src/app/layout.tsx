@@ -109,6 +109,9 @@ const jsonLd = {
   sameAs: [
     site.socials.github,
     site.socials.linkedin,
+    site.socials.x,
+    site.socials.instagram,
+    site.socials.leetcode,
   ],
   address: {
     "@type": "PostalAddress",
