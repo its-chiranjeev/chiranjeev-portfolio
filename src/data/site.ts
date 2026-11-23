@@ -15,7 +15,6 @@ export const siteConfig: SiteConfig = {
     email: "mailto:chiranjeevrastogi@gmail.com",
   },
   navLinks: [
-    { label: "Home", href: "/" },
     { label: "Portfolio", href: "/portfolio" },
     { label: "About", href: "/portfolio#about" },
     { label: "Skills", href: "/portfolio#skills" },

@@ -6,6 +6,7 @@ import { ProjectNavigation } from "@/components/projects/ProjectNavigation";
 import { ProjectSectionRenderer } from "@/components/projects/ProjectSectionRenderer";
 import { Container } from "@/components/ui/Container";
 import { getAdjacentProjects, getAllProjects, getProjectBySlug } from "@/lib/projects";
+import { getAbsoluteUrl } from "@/lib/env";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -31,15 +32,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+  const canonicalUrl = getAbsoluteUrl(`/projects/${project.slug}`);
 
   return {
     title: `${project.title} — Technical Case Study | Chiranjeev Rastogi`,
     description: `${project.tagline}. ${project.shortDescription}`,
-    ...(siteUrl
+    ...(canonicalUrl
       ? {
           alternates: {
-            canonical: `${siteUrl}/projects/${project.slug}`,
+            canonical: canonicalUrl,
           },
         }
       : {}),
@@ -47,7 +48,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title: `${project.title} — Technical Case Study | Chiranjeev Rastogi`,
       description: project.shortDescription,
       type: "article",
-      ...(siteUrl ? { url: `${siteUrl}/projects/${project.slug}` } : {}),
+      ...(canonicalUrl ? { url: canonicalUrl } : {}),
     },
     twitter: {
       card: "summary_large_image",

@@ -15,24 +15,25 @@ import {
   getSiteConfig,
 } from "@/lib/content";
 import { getAllProjects } from "@/lib/projects";
+import { getAbsoluteUrl } from "@/lib/env";
 import type { Metadata } from "next";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+const canonicalUrl = getAbsoluteUrl("/portfolio");
 
 export const metadata: Metadata = {
   title: "Main Portfolio",
   description:
     "Explore the full engineering portfolio of Chiranjeev Rastogi: Node.js, NestJS, and PostgreSQL case studies, technical skills taxonomy, internship experience, and education.",
-  ...(siteUrl
+  ...(canonicalUrl
     ? {
         alternates: {
-          canonical: `${siteUrl}/portfolio`,
+          canonical: canonicalUrl,
         },
         openGraph: {
           title: "Main Portfolio | Chiranjeev Rastogi",
           description:
             "Explore the full engineering portfolio of Chiranjeev Rastogi: Node.js, NestJS, and PostgreSQL case studies, technical skills taxonomy, internship experience, and education.",
-          url: `${siteUrl}/portfolio`,
+          url: canonicalUrl,
         },
       }
     : {}),

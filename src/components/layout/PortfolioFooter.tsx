@@ -1,6 +1,6 @@
 import { Container } from "@/components/ui/Container";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/icons";
-import { ArrowUp, ArrowLeft } from "lucide-react";
+import { ArrowUp } from "lucide-react";
 import Link from "next/link";
 
 export function PortfolioFooter() {
@@ -44,14 +44,6 @@ export function PortfolioFooter() {
 
           {/* Right: Actions */}
           <div className="flex items-center gap-4">
-            <Link
-              href="/"
-              className="inline-flex items-center gap-1.5 text-xs text-[var(--accent-lime)] hover:underline"
-            >
-              <ArrowLeft className="w-3.5 h-3.5" />
-              <span>Welcome Page</span>
-            </Link>
-
             <a
               href="#main-content"
               className="p-2 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-surface-elevated)] hover:text-[var(--text-primary)] transition-colors"

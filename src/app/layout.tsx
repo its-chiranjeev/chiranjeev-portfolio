@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
+import { env } from "@/lib/env";
+import { getSiteConfig } from "@/lib/content";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,17 +17,18 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+const site = getSiteConfig();
+const siteUrl = env.siteUrl;
 
 export const metadata: Metadata = {
   title: {
-    default: "Chiranjeev Rastogi | Node.js Backend Developer",
-    template: "%s | Chiranjeev Rastogi",
+    default: `${site.name} | ${site.title}`,
+    template: `%s | ${site.name}`,
   },
   description:
     "Portfolio of Chiranjeev Rastogi — Node.js Backend Developer specializing in NestJS, TypeScript, PostgreSQL, and scalable REST API architectures.",
-  authors: [{ name: "Chiranjeev Rastogi", url: siteUrl || undefined }],
-  creator: "Chiranjeev Rastogi",
+  authors: [{ name: site.name, url: siteUrl || undefined }],
+  creator: site.name,
   metadataBase: siteUrl ? new URL(siteUrl) : undefined,
   robots: {
     index: true,
@@ -42,8 +45,8 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     ...(siteUrl ? { url: siteUrl } : {}),
-    siteName: "Chiranjeev Rastogi Portfolio",
-    title: "Chiranjeev Rastogi | Node.js Backend Developer",
+    siteName: `${site.name} Portfolio`,
+    title: `${site.name} | ${site.title}`,
     description:
       "Node.js Backend Developer specializing in NestJS, TypeScript, PostgreSQL, and scalable REST API architectures.",
     images: [
@@ -51,13 +54,13 @@ export const metadata: Metadata = {
         url: "/images/logo.png",
         width: 800,
         height: 800,
-        alt: "Chiranjeev Rastogi — Node.js Backend Developer Logo",
+        alt: `${site.name} — ${site.title} Logo`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Chiranjeev Rastogi | Node.js Backend Developer",
+    title: `${site.name} | ${site.title}`,
     description:
       "Node.js Backend Developer specializing in NestJS, TypeScript, PostgreSQL, and scalable REST API architectures.",
     images: ["/images/logo.png"],
@@ -91,12 +94,12 @@ const themeScript = `(function() {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
-  name: "Chiranjeev Rastogi",
-  jobTitle: "Node.js Backend Developer",
+  name: site.name,
+  jobTitle: site.title,
   ...(siteUrl ? { url: siteUrl } : {}),
   sameAs: [
-    "https://github.com/its-chiranjeev",
-    "https://linkedin.com/in/chiranjeev-rastogi",
+    site.socials.github,
+    site.socials.linkedin,
   ],
   address: {
     "@type": "PostalAddress",

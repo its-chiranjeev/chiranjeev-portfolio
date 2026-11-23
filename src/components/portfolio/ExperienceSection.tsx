@@ -4,6 +4,7 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ExperienceItem } from "@/types/experience";
 import { Briefcase, Calendar, MapPin } from "lucide-react";
+import Image from "next/image";
 
 interface ExperienceSectionProps {
   experiences: ExperienceItem[];
@@ -24,8 +25,18 @@ export function ExperienceSection({ experiences }: ExperienceSectionProps) {
           {experiences.map((exp) => (
             <div key={exp.id} className="relative sm:pl-10">
               {/* Timeline marker icon */}
-              <div className="hidden sm:flex absolute left-0 top-1.5 w-8 h-8 rounded-full border border-[var(--border-subtle)] bg-[var(--bg-surface-elevated)] items-center justify-center text-[var(--accent-lime)]">
-                <Briefcase className="w-3.5 h-3.5" />
+              <div className="hidden sm:flex absolute left-0 top-1.5 w-8 h-8 rounded-full border border-[var(--border-subtle)] bg-[var(--bg-surface-elevated)] items-center justify-center overflow-hidden text-[var(--accent-lime)]">
+                {exp.logo ? (
+                  <Image
+                    src={exp.logo}
+                    alt={`${exp.company} logo`}
+                    width={32}
+                    height={32}
+                    className="w-full h-full object-contain bg-black p-1"
+                  />
+                ) : (
+                  <Briefcase className="w-3.5 h-3.5" />
+                )}
               </div>
 
               <Card className="p-6 sm:p-8 bg-[var(--bg-surface)] hover:border-[var(--border-strong)] transition-all">
@@ -40,9 +51,22 @@ export function ExperienceSection({ experiences }: ExperienceSectionProps) {
                         {exp.employmentType}
                       </Badge>
                     </div>
-                    <p className="font-mono text-sm text-[var(--accent-lime)] font-medium">
-                      {exp.company}
-                    </p>
+                    <div className="flex items-center gap-2">
+                      {exp.logo && (
+                        <div className="w-5 h-5 rounded overflow-hidden bg-black border border-[var(--border-subtle)] shrink-0 flex items-center justify-center p-0.5">
+                          <Image
+                            src={exp.logo}
+                            alt={`${exp.company} logo`}
+                            width={20}
+                            height={20}
+                            className="object-contain"
+                          />
+                        </div>
+                      )}
+                      <p className="font-mono text-sm text-[var(--accent-lime)] font-medium">
+                        {exp.company}
+                      </p>
+                    </div>
                   </div>
 
                   <div className="flex flex-wrap items-center gap-3 text-xs font-mono text-[var(--text-tertiary)]">

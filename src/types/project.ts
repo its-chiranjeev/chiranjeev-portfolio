@@ -111,6 +111,7 @@ export interface ProjectCaseStudy {
   category: ProjectCategory;
   role: string;
   organization?: string;
+  organizationLogo?: string;
   duration?: string;
   featured: boolean;
   published: boolean;

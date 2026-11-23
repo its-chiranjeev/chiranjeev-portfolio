@@ -5,6 +5,7 @@ export const experienceData: ExperienceItem[] = [
     id: "digixito-media-intern",
     role: "Node.js Backend Developer Intern",
     company: "Digixito Media Pvt. Ltd.",
+    logo: "/images/companies/digixito.png",
     employmentType: "Internship",
     location: "Noida, India (Hybrid)",
     period: "2026",

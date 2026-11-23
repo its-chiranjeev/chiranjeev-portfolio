@@ -2,7 +2,7 @@
 
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/icons";
-import { Menu, X, ArrowLeft, FileText } from "lucide-react";
+import { Menu, X, FileText } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
@@ -35,19 +35,8 @@ export function PortfolioNavbar() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-[var(--border-subtle)] bg-[var(--bg-canvas)]/85 backdrop-blur-md">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        {/* Left: Brand / Return to Landing */}
+        {/* Left: Brand */}
         <div className="flex items-center gap-4">
-          <Link
-            href="/"
-            className="flex items-center gap-1.5 text-xs font-mono text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors mr-2 hidden sm:flex"
-            title="Return to Welcome Page"
-          >
-            <ArrowLeft className="w-3.5 h-3.5" />
-            <span>Welcome</span>
-          </Link>
-
-          <div className="h-4 w-px bg-[var(--border-subtle)] hidden sm:block" />
-
           <Link href="/portfolio" className="flex items-center gap-2.5 group">
             <div className="w-7 h-7 rounded-md overflow-hidden border border-[var(--border-subtle)] bg-[var(--bg-surface-elevated)] flex items-center justify-center p-0.5 group-hover:border-[var(--accent-lime)] transition-colors">
               <Image
@@ -138,17 +127,6 @@ export function PortfolioNavbar() {
           aria-label="Portfolio Mobile Navigation"
           className="sm:hidden border-b border-[var(--border-subtle)] bg-[var(--bg-surface)] px-4 py-5 space-y-3 shadow-xl"
         >
-          <Link
-            href="/"
-            onClick={() => setMobileMenuOpen(false)}
-            className="flex items-center gap-2 p-2 rounded-lg text-xs font-mono text-[var(--text-tertiary)] hover:bg-[var(--bg-surface-elevated)]"
-          >
-            <ArrowLeft className="w-3.5 h-3.5" />
-            <span>Return to Welcome Page</span>
-          </Link>
-
-          <div className="border-t border-[var(--border-subtle)] pt-2" />
-
           {NAV_LINKS.map((link) => (
             <a
               key={link.label}

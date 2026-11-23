@@ -9,6 +9,7 @@ export interface ExperienceItem {
   role: string;
   company: string;
   companyUrl?: string;
+  logo?: string;
   employmentType: EmploymentType;
   location: string;
   period: string;

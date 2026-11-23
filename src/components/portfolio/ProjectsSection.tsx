@@ -5,7 +5,8 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { GithubIcon } from "@/components/ui/icons";
 import { ProjectCaseStudy } from "@/types/project";
-import { ArrowRight, Layers } from "lucide-react";
+import { ArrowRight, ExternalLink, Layers } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 interface ProjectsSectionProps {
@@ -40,8 +41,25 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
                     <Badge variant={project.category === "Professional Experience" ? "lime" : "default"}>
                       {project.category}
                     </Badge>
-                    <span className="text-xs font-mono text-[var(--text-tertiary)]">
-                      {project.role} {project.organization ? `\u2022 ${project.organization}` : ""}
+                    <span className="text-xs font-mono text-[var(--text-tertiary)] inline-flex items-center gap-1.5 flex-wrap">
+                      <span>{project.role}</span>
+                      {project.organization && (
+                        <>
+                          <span>&bull;</span>
+                          {project.organizationLogo && (
+                            <span className="w-4 h-4 rounded bg-black border border-[var(--border-subtle)] inline-flex items-center justify-center p-0.5 shrink-0 overflow-hidden">
+                              <Image
+                                src={project.organizationLogo}
+                                alt={project.organization}
+                                width={16}
+                                height={16}
+                                className="object-contain"
+                              />
+                            </span>
+                          )}
+                          <span>{project.organization}</span>
+                        </>
+                      )}
                     </span>
                   </div>
 
@@ -83,6 +101,20 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
                       <span>View Case Study</span>
                       <ArrowRight className="w-3.5 h-3.5 ml-1" />
                     </Button>
+
+                    {project.liveUrl && (
+                      <Button
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        variant="secondary"
+                        size="sm"
+                        className="font-mono text-xs"
+                      >
+                        <ExternalLink className="w-3.5 h-3.5" />
+                        <span>Live Site</span>
+                      </Button>
+                    )}
 
                     {project.githubUrl && (
                       <Button

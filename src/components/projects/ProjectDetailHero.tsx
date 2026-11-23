@@ -4,6 +4,7 @@ import { Container } from "@/components/ui/Container";
 import { GithubIcon } from "@/components/ui/icons";
 import { ProjectCaseStudy } from "@/types/project";
 import { Calendar, ExternalLink, ShieldCheck, User } from "lucide-react";
+import Image from "next/image";
 
 interface ProjectDetailHeroProps {
   project: ProjectCaseStudy;
@@ -51,9 +52,21 @@ export function ProjectDetailHero({ project }: ProjectDetailHeroProps) {
 
           {project.organization && (
             <div className="flex items-start gap-3">
-              <div className="p-2 rounded-lg bg-[var(--bg-surface-elevated)] text-[var(--accent-lime)] shrink-0">
-                <ShieldCheck className="w-4 h-4" />
-              </div>
+              {project.organizationLogo ? (
+                <div className="w-8 h-8 rounded-lg bg-black border border-[var(--border-subtle)] shrink-0 flex items-center justify-center p-1 overflow-hidden">
+                  <Image
+                    src={project.organizationLogo}
+                    alt={project.organization}
+                    width={28}
+                    height={28}
+                    className="object-contain"
+                  />
+                </div>
+              ) : (
+                <div className="p-2 rounded-lg bg-[var(--bg-surface-elevated)] text-[var(--accent-lime)] shrink-0">
+                  <ShieldCheck className="w-4 h-4" />
+                </div>
+              )}
               <div>
                 <span className="text-[10px] font-mono uppercase tracking-wider text-[var(--text-tertiary)] block">
                   Organization
