@@ -114,11 +114,12 @@ export function ProjectsView({ projects }: ProjectsViewProps) {
 
         {/* Project Collection List / Grid */}
         {filteredProjects.length > 0 ? (
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
             {filteredProjects.map((project, idx) => (
               <ProjectCard
                 key={project.slug}
                 project={project}
+                index={idx}
                 priority={idx === 0}
                 showFeaturedBadge={true}
               />
