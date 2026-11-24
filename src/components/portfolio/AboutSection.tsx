@@ -7,9 +7,9 @@ export function AboutSection() {
   const pillars = [
     {
       icon: Cpu,
-      title: "Modular Service Architecture",
+      title: "Full-Stack Application Architecture",
       description:
-        "Designing domain-driven microservices with clear boundaries, request pipeline DTO validation, and unified reverse-proxy gateways.",
+        "Building responsive Next.js and React user interfaces backed by modular NestJS and Node.js server pipelines with strict type safety.",
     },
     {
       icon: Database,
@@ -18,16 +18,16 @@ export function AboutSection() {
         "Building structured PostgreSQL schemas with TypeORM, managing reproducible migrations, and writing optimized relational queries.",
     },
     {
+      icon: Code,
+      title: "Modular Service & API Design",
+      description:
+        "Designing domain-driven microservices with clear boundaries, request pipeline DTO validation, and unified reverse-proxy gateways.",
+    },
+    {
       icon: Shield,
       title: "Defensive Security & RBAC",
       description:
         "Enforcing stateless JWT sessions, strict role-based route guards, double-submit CSRF cookie protection, and rate limiting with Helmet.",
-    },
-    {
-      icon: Code,
-      title: "Transactional Workflows",
-      description:
-        "Orchestrating multi-stage booking state machines, OTP-verified arrival and completion flows, and financial webhook reconciliations.",
     },
   ];
 
@@ -38,14 +38,14 @@ export function AboutSection() {
           badge="ABOUT ME"
           number="01"
           title="Engineering Focus & Background"
-          description="A backend engineer committed to data integrity, type-safe development, and clean API design."
+          description="A software engineer committed to robust full-stack architecture, data integrity, and clean interface design."
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Left Column: Narrative */}
           <div className="lg:col-span-7 space-y-5 text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed">
             <p>
-              I am a <strong className="text-[var(--text-primary)] font-semibold">Node.js Backend Developer</strong> based in Ghaziabad, India. My engineering background focuses on building scalable server-side systems, designing robust RESTful APIs, and implementing transactional database architectures.
+              I am a <strong className="text-[var(--text-primary)] font-semibold">Software Engineer and Full-Stack Developer</strong> based in Ghaziabad, India. My engineering background focuses on building complete web applications—from modern React and Next.js frontend interfaces to scalable Node.js server architectures, resilient RESTful APIs, and transactional database systems.
             </p>
             <p>
               During my internship at <strong className="text-[var(--text-primary)] font-semibold">Digixito Media Pvt. Ltd.</strong>, I contributed individual backend engineering across production platforms (<span className="text-[var(--accent-lime)] font-mono text-xs">Poojawala</span> and <span className="text-[var(--accent-lime)] font-mono text-xs">HiChandra</span>). My responsibilities encompassed multi-role authentication (RBAC), complex booking lifecycles, Razorpay payments, RazorpayX payouts, and automated PDF tax invoice pipelines.
@@ -61,15 +61,15 @@ export function AboutSection() {
               <div className="flex flex-wrap gap-3">
                 <span className="inline-flex items-center gap-1.5 text-xs font-mono text-[var(--text-tertiary)] bg-[var(--bg-surface-elevated)] px-3 py-1.5 rounded-lg border border-[var(--border-subtle)]">
                   <CheckCircle2 className="w-3.5 h-3.5 text-[var(--accent-lime)]" />
-                  <span>REST API Design</span>
+                  <span>Full-Stack Architecture</span>
                 </span>
                 <span className="inline-flex items-center gap-1.5 text-xs font-mono text-[var(--text-tertiary)] bg-[var(--bg-surface-elevated)] px-3 py-1.5 rounded-lg border border-[var(--border-subtle)]">
                   <CheckCircle2 className="w-3.5 h-3.5 text-[var(--accent-lime)]" />
-                  <span>Transactional State Machines</span>
+                  <span>REST & Microservices</span>
                 </span>
                 <span className="inline-flex items-center gap-1.5 text-xs font-mono text-[var(--text-tertiary)] bg-[var(--bg-surface-elevated)] px-3 py-1.5 rounded-lg border border-[var(--border-subtle)]">
                   <CheckCircle2 className="w-3.5 h-3.5 text-[var(--accent-lime)]" />
-                  <span>Automated API Testing</span>
+                  <span>Relational Modeling & Testing</span>
                 </span>
               </div>
             </div>

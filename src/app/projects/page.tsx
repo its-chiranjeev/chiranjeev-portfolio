@@ -10,7 +10,7 @@ const canonicalUrl = getAbsoluteUrl("/projects");
 export const metadata: Metadata = {
   title: "All Projects",
   description:
-    "An overview of the applications, experiments, and engineering projects I've built. Specializing in Node.js, NestJS, and PostgreSQL distributed systems.",
+    "An overview of the applications, experiments, and engineering projects I've built. Specializing in full-stack web applications and distributed backend architectures with TypeScript, Next.js, and NestJS.",
   ...(canonicalUrl
     ? {
         alternates: {
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
         openGraph: {
           title: "All Projects | Chiranjeev Rastogi",
           description:
-            "An overview of the applications, experiments, and engineering projects I've built. Specializing in Node.js, NestJS, and PostgreSQL distributed systems.",
+            "An overview of the applications, experiments, and engineering projects I've built. Specializing in full-stack web applications and distributed backend architectures with TypeScript, Next.js, and NestJS.",
           url: canonicalUrl,
           images: [
             {
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "All Projects | Chiranjeev Rastogi",
     description:
-      "An overview of the applications, experiments, and engineering projects I've built. Specializing in Node.js, NestJS, and PostgreSQL distributed systems.",
+      "An overview of the applications, experiments, and engineering projects I've built. Specializing in full-stack web applications and distributed backend architectures with TypeScript, Next.js, and NestJS.",
     images: ["/images/og-image-v2.png"],
   },
 };

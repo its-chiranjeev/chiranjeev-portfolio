@@ -20,7 +20,7 @@ export function CopyEmailButton({ email }: { email: string }) {
     <button
       type="button"
       onClick={handleCopy}
-      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-surface-elevated)] hover:border-[var(--border-strong)] text-xs font-mono text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-all cursor-pointer"
+      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[var(--btn-tertiary-border)] bg-[var(--btn-tertiary-bg)] hover:bg-[var(--btn-tertiary-hover-bg)] hover:border-[var(--border-strong)] text-xs font-mono text-[var(--btn-tertiary-fg)] hover:text-[var(--btn-tertiary-hover-fg)] transition-all cursor-pointer min-h-[34px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
       aria-label={copied ? "Email address copied to clipboard" : "Copy email address to clipboard"}
     >
       <span className="sr-only" aria-live="polite">

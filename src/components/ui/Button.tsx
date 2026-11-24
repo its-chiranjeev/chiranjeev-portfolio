@@ -2,7 +2,13 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import React from "react";
 
-export type ButtonVariant = "primary" | "secondary" | "outline" | "ghost";
+export type ButtonVariant =
+  | "primary"
+  | "secondary"
+  | "tertiary"
+  | "outline"
+  | "ghost";
+
 export type ButtonSize = "sm" | "md" | "lg";
 
 interface BaseButtonProps {
@@ -35,23 +41,25 @@ export function Button({
 }: ButtonProps) {
   const variantStyles: Record<ButtonVariant, string> = {
     primary:
-      "bg-[var(--accent-lime)] text-black hover:bg-[var(--accent-lime-hover)] font-semibold shadow-sm",
+      "bg-[var(--btn-primary-bg)] text-[var(--btn-primary-fg)] hover:bg-[var(--btn-primary-hover)] active:scale-[0.98] font-semibold shadow-xs focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]",
     secondary:
-      "bg-[var(--bg-surface-elevated)] text-[var(--text-primary)] hover:bg-[var(--bg-surface-subtle)] border border-[var(--border-subtle)] hover:border-[var(--border-strong)]",
+      "bg-[var(--btn-secondary-bg)] text-[var(--btn-secondary-fg)] border border-[var(--btn-secondary-border)] hover:bg-[var(--btn-secondary-hover-bg)] hover:border-[var(--btn-secondary-hover-border)] active:scale-[0.98] font-medium shadow-2xs focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]",
+    tertiary:
+      "bg-[var(--btn-tertiary-bg)] text-[var(--btn-tertiary-fg)] border border-[var(--btn-tertiary-border)] hover:bg-[var(--btn-tertiary-hover-bg)] hover:text-[var(--btn-tertiary-hover-fg)] active:scale-[0.98] font-medium focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]",
     outline:
-      "bg-transparent text-[var(--text-primary)] border border-[var(--border-strong)] hover:border-[var(--accent-lime)] hover:text-[var(--accent-lime)]",
+      "bg-[var(--btn-secondary-bg)] text-[var(--btn-secondary-fg)] border border-[var(--btn-secondary-border)] hover:bg-[var(--btn-secondary-hover-bg)] hover:border-[var(--btn-secondary-hover-border)] active:scale-[0.98] font-medium focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]",
     ghost:
-      "bg-transparent text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface-elevated)]",
+      "bg-transparent text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface-elevated)] active:scale-[0.98] font-medium",
   };
 
   const sizeStyles: Record<ButtonSize, string> = {
-    sm: "px-3 py-1.5 text-xs rounded-md",
-    md: "px-4 py-2 text-sm rounded-lg",
-    lg: "px-6 py-3 text-base rounded-lg font-medium",
+    sm: "px-3 py-1.5 text-xs rounded-lg min-h-[34px]",
+    md: "px-4 py-2 text-sm rounded-lg min-h-[40px]",
+    lg: "px-6 py-3 text-base rounded-lg font-medium min-h-[48px]",
   };
 
   const combinedClassName = cn(
-    "inline-flex items-center justify-center gap-2 transition-all duration-150 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed select-none",
+    "inline-flex items-center justify-center gap-2 transition-all duration-150 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed select-none focus-visible:outline-none",
     variantStyles[variant],
     sizeStyles[size],
     className

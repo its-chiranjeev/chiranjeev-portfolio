@@ -23,7 +23,7 @@ const canonicalUrl = getAbsoluteUrl("/portfolio");
 export const metadata: Metadata = {
   title: "Main Portfolio",
   description:
-    "Explore the full engineering portfolio of Chiranjeev Rastogi: Node.js, NestJS, and PostgreSQL case studies, technical skills taxonomy, internship experience, and education.",
+    "Explore the engineering portfolio of Chiranjeev Rastogi: Full-stack web applications, NestJS and PostgreSQL case studies, technical skills taxonomy, internship experience, and education.",
   ...(canonicalUrl
     ? {
         alternates: {
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
         openGraph: {
           title: "Main Portfolio | Chiranjeev Rastogi",
           description:
-            "Explore the full engineering portfolio of Chiranjeev Rastogi: Node.js, NestJS, and PostgreSQL case studies, technical skills taxonomy, internship experience, and education.",
+            "Explore the engineering portfolio of Chiranjeev Rastogi: Full-stack web applications, NestJS and PostgreSQL case studies, technical skills taxonomy, internship experience, and education.",
           url: canonicalUrl,
           images: [
             {
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Main Portfolio | Chiranjeev Rastogi",
     description:
-      "Explore the full engineering portfolio of Chiranjeev Rastogi: Node.js, NestJS, and PostgreSQL case studies, technical skills taxonomy, internship experience, and education.",
+      "Explore the engineering portfolio of Chiranjeev Rastogi: Full-stack web applications, NestJS and PostgreSQL case studies, technical skills taxonomy, internship experience, and education.",
     images: ["/images/og-image-v2.png"],
   },
 };
