@@ -18,33 +18,112 @@
     --accent-lime: #a3e635;
     --accent-lime-hover: #bef264;
     --accent-lime-muted: rgba(163, 230, 53, 0.12);
+    --accent-lime-fg: #09090b;
 
     --card: #121216;
     --card-border: #272730;
     --ring: #a3e635;
+    --focus-ring: #a3e635;
+
+    /* Button Tokens (Dark) */
+    --btn-primary-bg: #a3e635;
+    --btn-primary-fg: #09090b;
+    --btn-primary-hover: #bef264;
+
+    --btn-secondary-bg: #18181f;
+    --btn-secondary-fg: #f4f4f6;
+    --btn-secondary-border: #272730;
+    --btn-secondary-hover-bg: #1e1e26;
+    --btn-secondary-hover-border: #3f3f4e;
+
+    --btn-tertiary-bg: #18181f;
+    --btn-tertiary-fg: #a1a1aa;
+    --btn-tertiary-border: #272730;
+    --btn-tertiary-hover-bg: #1e1e26;
+    --btn-tertiary-hover-fg: #f4f4f6;
+
+    /* Portrait Shadow (Dark) */
+    --shadow-portrait: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+
+    /* Evidence & Status Badges (Dark) */
+    --badge-production-bg: rgba(6, 78, 59, 0.4);
+    --badge-production-fg: #6EE7B7;
+    --badge-production-border: rgba(6, 95, 70, 0.4);
+
+    --badge-portfolio-bg: rgba(23, 37, 84, 0.4);
+    --badge-portfolio-fg: #93C5FD;
+    --badge-portfolio-border: rgba(30, 58, 138, 0.4);
+
+    --badge-academic-bg: rgba(69, 26, 3, 0.4);
+    --badge-academic-fg: #FCD34D;
+    --badge-academic-border: rgba(146, 64, 14, 0.4);
+
+    --badge-learning-bg: rgba(59, 7, 100, 0.4);
+    --badge-learning-fg: #D8B4FE;
+    --badge-learning-border: rgba(107, 33, 168, 0.4);
   }
 
   [data-theme="light"],
   .light {
-    --bg-canvas: #f8fafc;
-    --bg-surface: #ffffff;
-    --bg-surface-elevated: #f1f5f9;
-    --bg-surface-subtle: #e2e8f0;
+    /* Clean Light Theme Palette */
+    --bg-canvas: #F8FAFC;
+    --bg-surface: #FFFFFF;
+    --bg-surface-elevated: #F1F5F9;
+    --bg-surface-subtle: #E2E8F0;
 
-    --border-subtle: #e2e8f0;
-    --border-strong: #cbd5e1;
+    --border-subtle: #DCE3EC;
+    --border-strong: #CBD5E1;
 
-    --text-primary: #0f172a;
-    --text-secondary: #475569;
-    --text-tertiary: #64748b;
+    --text-primary: #172033;
+    --text-secondary: #526078;
+    --text-tertiary: #5E6E87; /* 5.25:1 on white, 4.80:1 on elevated #F1F5F9 */
 
-    --accent-lime: #4d7c0f;
-    --accent-lime-hover: #3f6212;
-    --accent-lime-muted: rgba(77, 124, 15, 0.1);
+    --accent-lime: #3F7D20;
+    --accent-lime-hover: #326719;
+    --accent-lime-muted: #EEF5E8;
+    --accent-lime-fg: #FFFFFF;
 
-    --card: #ffffff;
-    --card-border: #e2e8f0;
-    --ring: #4d7c0f;
+    --card: #FFFFFF;
+    --card-border: #DCE3EC;
+    --ring: #3F7D20;
+    --focus-ring: #3F7D20;
+
+    /* Button Tokens (Light) */
+    --btn-primary-bg: #3F7D20;
+    --btn-primary-fg: #FFFFFF;
+    --btn-primary-hover: #326719;
+
+    --btn-secondary-bg: #FFFFFF;
+    --btn-secondary-fg: #172033;
+    --btn-secondary-border: #DCE3EC;
+    --btn-secondary-hover-bg: #F1F5F9;
+    --btn-secondary-hover-border: #CBD5E1;
+
+    --btn-tertiary-bg: #F1F5F9;
+    --btn-tertiary-fg: #526078;
+    --btn-tertiary-border: #DCE3EC;
+    --btn-tertiary-hover-bg: #E2E8F0;
+    --btn-tertiary-hover-fg: #172033;
+
+    /* Restrained Layered Portrait Shadow */
+    --shadow-portrait: 0 12px 28px rgba(15, 23, 42, 0.08), 0 3px 8px rgba(15, 23, 42, 0.04);
+
+    /* Evidence & Status Badges (Light) */
+    --badge-production-bg: #ECFDF5;
+    --badge-production-fg: #065F46;
+    --badge-production-border: #A7F3D0;
+
+    --badge-portfolio-bg: #EFF6FF;
+    --badge-portfolio-fg: #1E40AF;
+    --badge-portfolio-border: #BFDBFE;
+
+    --badge-academic-bg: #FFFBEB;
+    --badge-academic-fg: #92400E;
+    --badge-academic-border: #FDE68A;
+
+    --badge-learning-bg: #FAF5FF;
+    --badge-learning-fg: #6B21A8;
+    --badge-learning-border: #E9D5FF;
   }
 
   [data-theme="dark"],
@@ -64,10 +143,49 @@
     --accent-lime: #a3e635;
     --accent-lime-hover: #bef264;
     --accent-lime-muted: rgba(163, 230, 53, 0.12);
+    --accent-lime-fg: #09090b;
 
     --card: #121216;
     --card-border: #272730;
     --ring: #a3e635;
+    --focus-ring: #a3e635;
+
+    /* Button Tokens (Dark) */
+    --btn-primary-bg: #a3e635;
+    --btn-primary-fg: #09090b;
+    --btn-primary-hover: #bef264;
+
+    --btn-secondary-bg: #18181f;
+    --btn-secondary-fg: #f4f4f6;
+    --btn-secondary-border: #272730;
+    --btn-secondary-hover-bg: #1e1e26;
+    --btn-secondary-hover-border: #3f3f4e;
+
+    --btn-tertiary-bg: #18181f;
+    --btn-tertiary-fg: #a1a1aa;
+    --btn-tertiary-border: #272730;
+    --btn-tertiary-hover-bg: #1e1e26;
+    --btn-tertiary-hover-fg: #f4f4f6;
+
+    /* Portrait Shadow (Dark) */
+    --shadow-portrait: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+
+    /* Evidence & Status Badges (Dark) */
+    --badge-production-bg: rgba(6, 78, 59, 0.4);
+    --badge-production-fg: #6EE7B7;
+    --badge-production-border: rgba(6, 95, 70, 0.4);
+
+    --badge-portfolio-bg: rgba(23, 37, 84, 0.4);
+    --badge-portfolio-fg: #93C5FD;
+    --badge-portfolio-border: rgba(30, 58, 138, 0.4);
+
+    --badge-academic-bg: rgba(69, 26, 3, 0.4);
+    --badge-academic-fg: #FCD34D;
+    --badge-academic-border: rgba(146, 64, 14, 0.4);
+
+    --badge-learning-bg: rgba(59, 7, 100, 0.4);
+    --badge-learning-fg: #D8B4FE;
+    --badge-learning-border: rgba(107, 33, 168, 0.4);
   }
 }
 
@@ -132,7 +250,7 @@ body {
 
 /* Accessibility: Focus-visible styling */
 :focus-visible {
-  outline: 2px solid var(--accent-lime);
+  outline: 2px solid var(--focus-ring);
   outline-offset: 2px;
 }
 
@@ -147,4 +265,3 @@ body {
     scroll-behavior: auto !important;
   }
 }
-

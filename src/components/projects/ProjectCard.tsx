@@ -157,7 +157,7 @@ export function ProjectCard({
                 href={liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                variant="outline"
+                variant="secondary"
                 size="sm"
                 className="font-mono text-xs"
                 aria-label={`View live demo of ${project.title}`}

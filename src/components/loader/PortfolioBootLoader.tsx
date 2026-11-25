@@ -20,7 +20,7 @@ const BOOT_STEPS: BootStep[] = [
   {
     id: "02",
     command: "Loading developer profile...",
-    detail: "Chiranjeev Rastogi // Node.js Backend Developer",
+    detail: "Chiranjeev Rastogi // Software Engineer & Full-Stack Developer",
   },
   {
     id: "03",
@@ -147,10 +147,10 @@ export function PortfolioBootLoader() {
       <noscript>
         <div className="p-6 rounded-xl border border-[var(--border-subtle)] bg-[#121216] text-center space-y-4 max-w-md w-full">
           <p className="font-mono text-sm text-[var(--accent-lime)] font-bold">
-            Chiranjeev Rastogi — Node.js Backend Developer
+            Chiranjeev Rastogi — Software Engineer & Full-Stack Developer
           </p>
           <p className="text-xs text-[var(--text-secondary)]">
-            Building resilient REST APIs, transactional workflows and scalable backend systems.
+            Engineering full-stack web applications, resilient backend architectures, and high-integrity systems.
           </p>
           <a
             href="/portfolio"

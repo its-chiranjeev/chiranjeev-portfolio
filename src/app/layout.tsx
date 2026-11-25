@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     template: `%s | ${site.name}`,
   },
   description:
-    "Portfolio of Chiranjeev Rastogi — Software Engineer specializing in scalable backend architectures, distributed systems, and modular web applications with Node.js, NestJS, and TypeScript.",
+    "Portfolio of Chiranjeev Rastogi — Software Engineer & Full-Stack Developer specializing in full-stack web applications, scalable backend architectures, and distributed systems with Next.js, Node.js, NestJS, and TypeScript.",
   applicationName: "Chiranjeev Rastogi Portfolio",
   authors: [{ name: site.name, url: siteUrl || undefined }],
   creator: site.name,

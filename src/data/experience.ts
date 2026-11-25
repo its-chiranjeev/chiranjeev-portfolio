@@ -37,14 +37,14 @@ export const experienceData: ExperienceItem[] = [
   },
   {
     id: "independent-backend-dev",
-    role: "Backend API Developer",
+    role: "Software Engineer (Independent Development)",
     company: "Independent Projects",
     employmentType: "Independent",
     location: "Ghaziabad, India",
     period: "2024 — Present",
     current: true,
     summary:
-      "Independently conceptualizing, engineering, and testing backend architectures, database schemas, and microservices with modern Node.js and TypeScript ecosystems.",
+      "Engineering full-stack web applications, distributed APIs, and database schemas with TypeScript, Next.js, and modern NestJS ecosystems.",
     highlights: [
       "Architected and open-sourced production-ready REST services with NestJS, PostgreSQL, TypeORM, and automated schema migrations.",
       "Implemented automated test pipelines using Jest for unit test coverage and Supertest for HTTP endpoint verification.",
@@ -52,6 +52,8 @@ export const experienceData: ExperienceItem[] = [
       "Maintained complete API documentation via Swagger/OpenAPI with interactive sandbox testing.",
     ],
     technologies: [
+      "Next.js",
+      "React",
       "NestJS",
       "TypeScript",
       "PostgreSQL",

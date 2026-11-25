@@ -11,7 +11,6 @@ import {
   Terminal,
   Database,
   Server,
-  ShieldCheck,
   MapPin,
 } from "lucide-react";
 import gsap from "gsap";
@@ -42,6 +41,7 @@ export function PortfolioHero({
   const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
   const [titleStatus, setTitleStatus] = useState<"visible" | "exiting" | "entering">("visible");
   const timersRef = useRef<NodeJS.Timeout[]>([]);
+  const rafRef = useRef<number | null>(null);
 
   // GSAP DOM refs
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -59,29 +59,30 @@ export function PortfolioHero({
     let isMounted = true;
 
     const runAnimationCycle = () => {
+      // Hold visible for 3200ms so reader can comfortably absorb the role
       const holdTimer = setTimeout(() => {
         if (!isMounted) return;
         setTitleStatus("exiting");
 
+        // Crisp exit transition: 220ms
         const exitTimer = setTimeout(() => {
           if (!isMounted) return;
           setCurrentTitleIndex((prev) => (prev + 1) % TITLES.length);
           setTitleStatus("entering");
 
-          const frameId = requestAnimationFrame(() => {
+          rafRef.current = requestAnimationFrame(() => {
             if (!isMounted) return;
             const enterTimer = setTimeout(() => {
               if (!isMounted) return;
               setTitleStatus("visible");
               runAnimationCycle();
-            }, 20);
+            }, 30);
             timersRef.current.push(enterTimer);
           });
-          timersRef.current.push(frameId as unknown as NodeJS.Timeout);
-        }, 280);
+        }, 220);
 
         timersRef.current.push(exitTimer);
-      }, 2000);
+      }, 3200);
 
       timersRef.current.push(holdTimer);
     };
@@ -92,6 +93,10 @@ export function PortfolioHero({
       isMounted = false;
       timersRef.current.forEach((t) => clearTimeout(t));
       timersRef.current = [];
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+        rafRef.current = null;
+      }
     };
   }, []);
 
@@ -302,9 +307,9 @@ export function PortfolioHero({
         >
           <div className="flex items-center gap-2.5 font-mono text-xs text-[var(--text-tertiary)] bg-[var(--bg-surface)]/80 backdrop-blur-md px-3 py-1.5 rounded-full border border-[var(--border-subtle)]">
             <span className="w-2 h-2 rounded-full bg-[var(--accent-lime)] animate-pulse" />
-            <span className="text-[var(--text-primary)] font-semibold">BACKEND ARCHITECTURE</span>
+            <span className="text-[var(--text-primary)] font-semibold">SOFTWARE ENGINEERING</span>
             <span className="hidden sm:inline">&bull;</span>
-            <span className="hidden sm:inline text-[var(--text-secondary)]">DISTRIBUTED SYSTEMS</span>
+            <span className="hidden sm:inline text-[var(--text-secondary)]">FULL-STACK DEVELOPMENT</span>
           </div>
 
           <div className="flex items-center gap-2 font-mono text-xs text-[var(--accent-lime)] bg-[var(--bg-surface)]/80 backdrop-blur-md px-3 py-1.5 rounded-full border border-[var(--border-subtle)]">
@@ -320,7 +325,7 @@ export function PortfolioHero({
             {/* LEFT: Portrait Card */}
             <div
               ref={portraitWrapperRef}
-              className="w-[200px] sm:w-[240px] lg:w-[350px] xl:w-[390px] h-[260px] sm:h-[310px] lg:h-[470px] xl:h-[510px] shrink-0 relative rounded-2xl overflow-hidden border border-[var(--border-subtle)] bg-[var(--bg-surface)] shadow-2xl group will-change-transform"
+              className="w-[200px] sm:w-[240px] lg:w-[350px] xl:w-[390px] h-[260px] sm:h-[310px] lg:h-[470px] xl:h-[510px] shrink-0 relative rounded-2xl overflow-hidden border border-black/[0.08] dark:border-[var(--border-subtle)] bg-[var(--bg-surface)] shadow-[var(--shadow-portrait)] group will-change-transform"
             >
               <Image
                 src="/images/avatar.jpg"
@@ -328,14 +333,14 @@ export function PortfolioHero({
                 fill
                 priority
                 sizes="(max-width: 640px) 200px, (max-width: 1024px) 240px, 390px"
-                className="object-cover object-top filter grayscale contrast-[112%] brightness-[94%] transition-all duration-500 group-hover:contrast-[118%]"
+                className="object-cover object-top filter grayscale contrast-[120%] brightness-[92%] dark:contrast-[115%] dark:brightness-[95%] transition-all duration-500 group-hover:contrast-[126%]"
               />
 
-              {/* Cinematic Bottom Gradient Vignette */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-canvas)] via-transparent to-transparent opacity-70 pointer-events-none" />
+              {/* Subtle neutral ground vignette behind caption bar (zero white fog in light mode) */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent dark:from-black/60 pointer-events-none" />
 
               {/* Inner subtle frame border */}
-              <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/10 pointer-events-none" />
+              <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-black/10 dark:ring-white/10 pointer-events-none" />
 
               {/* Editorial Portrait Caption Bar */}
               <div className="absolute bottom-3 inset-x-3 flex items-center justify-between text-[10px] font-mono text-[var(--text-tertiary)] bg-[var(--bg-surface-elevated)]/85 backdrop-blur-md px-2.5 py-1.5 rounded-lg border border-[var(--border-subtle)]">
@@ -374,25 +379,27 @@ export function PortfolioHero({
                 <span className="shrink-0 text-[var(--text-secondary)]">I&apos;m a</span>
                 <div className="relative inline-flex items-center overflow-hidden h-[1.4em] align-middle">
                   <span
-                    className={`text-[var(--accent-lime)] inline-flex items-center whitespace-nowrap will-change-transform ${titleStatus === "visible"
+                    className={`text-[var(--accent-lime)] inline-flex items-center whitespace-nowrap will-change-transform ${
+                      titleStatus === "visible"
                         ? "transition-all duration-300 ease-out transform translate-y-0 opacity-100"
                         : titleStatus === "exiting"
-                          ? "transition-all duration-300 ease-in transform -translate-y-full opacity-0"
+                          ? "transition-all duration-200 ease-in transform -translate-y-full opacity-0"
                           : "transition-none transform translate-y-full opacity-0"
-                      }`}
+                    }`}
                   >
                     <span>{TITLES[currentTitleIndex]}</span>
-                    <span
-                      className="inline-block w-0.5 sm:w-[3px] h-[0.85em] bg-[var(--accent-lime)] ml-1.5 animate-pulse shadow-[0_0_8px_rgba(163,230,53,0.8)] align-middle"
-                      aria-hidden="true"
-                    />
                   </span>
                 </div>
+                {/* Persistent blinking cursor: always aligned and visible during transitions */}
+                <span
+                  className="inline-block w-0.5 sm:w-[3px] h-[0.85em] bg-[var(--accent-lime)] -ml-0.5 animate-pulse shadow-[0_0_8px_rgba(163,230,53,0.8)] align-middle shrink-0"
+                  aria-hidden="true"
+                />
               </div>
 
               {/* Subtitle / Domain Focus & Location */}
               <div className="font-mono text-xs sm:text-sm text-[var(--text-secondary)] mb-3.5 sm:mb-4 flex flex-wrap items-center justify-center lg:justify-start gap-x-2 gap-y-1">
-                <span className="text-[var(--text-primary)] font-medium">Backend Development &bull; Distributed Systems</span>
+                <span className="text-[var(--text-primary)] font-medium">Full-Stack Development &bull; Backend Engineering</span>
                 <span className="text-[var(--text-tertiary)]">&bull;</span>
                 <span className="flex items-center gap-1 text-[var(--text-tertiary)]">
                   <MapPin className="w-3 h-3 text-[var(--accent-lime)]" />
@@ -402,22 +409,22 @@ export function PortfolioHero({
 
               {/* Value Proposition */}
               <p className="text-xs sm:text-sm xl:text-base text-[var(--text-secondary)] leading-relaxed mb-5 max-w-xl mx-auto lg:mx-0">
-                Specializing in architecting modular REST microservices, transactional state machines, and relational database systems using <span className="text-[var(--text-primary)] font-medium">Node.js, NestJS, TypeScript,</span> and <span className="text-[var(--text-primary)] font-medium">PostgreSQL</span>. Experienced in shipping production-style internship platforms and verifiable open-source backend services.
+                Engineering complete full-stack web applications with modern <span className="text-[var(--text-primary)] font-medium">React and Next.js</span>, backed by resilient <span className="text-[var(--text-primary)] font-medium">Node.js, NestJS, TypeScript,</span> and <span className="text-[var(--text-primary)] font-medium">PostgreSQL</span> server-side architectures. Experienced in shipping production client platforms, robust RESTful APIs, and responsive interfaces.
               </p>
 
               {/* Spec Tags */}
               <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 mb-5 sm:mb-6">
                 <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[var(--bg-surface-elevated)] border border-[var(--border-subtle)] text-[11px] font-mono text-[var(--text-secondary)]">
+                  <Terminal className="w-3.5 h-3.5 text-[var(--accent-lime)]" />
+                  <span>Full-Stack Web (Next.js / React)</span>
+                </div>
+                <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[var(--bg-surface-elevated)] border border-[var(--border-subtle)] text-[11px] font-mono text-[var(--text-secondary)]">
                   <Server className="w-3 h-3 text-[var(--accent-lime)]" />
-                  <span>NestJS Microservices</span>
+                  <span>NestJS & Node.js Architecture</span>
                 </div>
                 <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[var(--bg-surface-elevated)] border border-[var(--border-subtle)] text-[11px] font-mono text-[var(--text-secondary)]">
                   <Database className="w-3 h-3 text-[var(--accent-lime)]" />
-                  <span>PostgreSQL / TypeORM</span>
-                </div>
-                <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[var(--bg-surface-elevated)] border border-[var(--border-subtle)] text-[11px] font-mono text-[var(--text-secondary)]">
-                  <ShieldCheck className="w-3 h-3 text-[var(--accent-lime)]" />
-                  <span>JWT / RBAC Defense</span>
+                  <span>PostgreSQL & Distributed Data</span>
                 </div>
               </div>
 
@@ -446,7 +453,7 @@ export function PortfolioHero({
 
                 <Button
                   href="#contact"
-                  variant="outline"
+                  variant="secondary"
                   size="sm"
                   className="font-mono text-xs"
                 >

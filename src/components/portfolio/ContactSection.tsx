@@ -20,7 +20,7 @@ export function ContactSection({ site }: ContactSectionProps) {
           badge="CONTACT"
           number="06"
           title="Direct Communication & Inquiries"
-          description="Looking for opportunities in Node.js backend development, REST API engineering, and distributed systems."
+          description="Looking for opportunities in software engineering, full-stack development, and backend systems architecture."
         />
 
         <div className="max-w-6xl mx-auto">

@@ -32,7 +32,7 @@ export function ExperienceSection({ experiences }: ExperienceSectionProps) {
                     alt={`${exp.company} logo`}
                     width={32}
                     height={32}
-                    className="w-full h-full object-contain bg-black p-1"
+                    className="w-full h-full object-contain bg-[var(--bg-surface-elevated)] dark:bg-black p-1"
                   />
                 ) : (
                   <Briefcase className="w-3.5 h-3.5" />
@@ -53,7 +53,7 @@ export function ExperienceSection({ experiences }: ExperienceSectionProps) {
                     </div>
                     <div className="flex items-center gap-2">
                       {exp.logo && (
-                        <div className="w-5 h-5 rounded overflow-hidden bg-black border border-[var(--border-subtle)] shrink-0 flex items-center justify-center p-0.5">
+                        <div className="w-5 h-5 rounded overflow-hidden bg-[var(--bg-surface-elevated)] dark:bg-black border border-[var(--border-subtle)] shrink-0 flex items-center justify-center p-0.5">
                           <Image
                             src={exp.logo}
                             alt={`${exp.company} logo`}

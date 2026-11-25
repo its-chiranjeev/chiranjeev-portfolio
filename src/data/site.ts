@@ -2,10 +2,10 @@ import { SiteConfig } from "@/types/site";
 
 export const siteConfig: SiteConfig = {
   name: "Chiranjeev Rastogi",
-  title: "Node.js Backend Developer",
-  tagline: "Building resilient REST APIs, transactional workflows, and modular backend architectures.",
+  title: "Software Engineer | Full-Stack Developer",
+  tagline: "Engineering full-stack web applications, resilient backend architectures, and high-integrity systems.",
   description:
-    "Portfolio of Chiranjeev Rastogi — Node.js Backend Developer specializing in NestJS, TypeScript, PostgreSQL, TypeORM, and secure API system design.",
+    "Portfolio of Chiranjeev Rastogi — Software Engineer & Full-Stack Developer specializing in modern React and Next.js, resilient Node.js and NestJS backends, PostgreSQL, and scalable systems.",
   location: "Ghaziabad, Uttar Pradesh, India",
   email: "chiranjeevrastogi@gmail.com",
   phone: "+91 8468801711",
