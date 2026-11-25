@@ -14,7 +14,7 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
     <section id="projects" className="py-20 border-b border-[var(--border-subtle)]">
       <Container>
         <SectionHeading
-          badge="PROJECTS"
+          badge="SELECTED WORK"
           number="04"
           title="Featured Projects & Case Studies"
           description="In-depth technical case studies highlighting individual backend engineering, API topologies, and data architecture."
@@ -44,7 +44,7 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
             <div className="space-y-2 max-w-xl">
               <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-[var(--bg-surface-elevated)] border border-[var(--border-subtle)] text-[11px] font-mono text-[var(--accent-lime)]">
                 <Terminal className="w-3.5 h-3.5" />
-                <span>PROJECT_ARCHIVE // SYSTEM_EXPLORATION</span>
+                <span>Explore All Projects</span>
               </div>
               <h4 className="text-xl sm:text-2xl font-bold tracking-tight text-[var(--text-primary)]">
                 Looking for more projects?

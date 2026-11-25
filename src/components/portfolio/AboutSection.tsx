@@ -35,7 +35,7 @@ export function AboutSection() {
     <section id="about" className="py-20 border-b border-[var(--border-subtle)]">
       <Container>
         <SectionHeading
-          badge="ABOUT ME"
+          badge="A LITTLE ABOUT ME"
           number="01"
           title="Engineering Focus & Background"
           description="A software engineer committed to robust full-stack architecture, data integrity, and clean interface design."

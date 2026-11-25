@@ -82,7 +82,7 @@ export function ThankYouView() {
             {/* Monospace Badge */}
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-mono uppercase tracking-wider bg-[var(--bg-surface-elevated)] border border-[var(--border-subtle)] text-[var(--accent-lime)]">
               <ShieldCheck className="w-3.5 h-3.5" aria-hidden="true" />
-              <span>Inquiry Confirmed // 200 OK</span>
+              <span>Inquiry Confirmed</span>
             </div>
 
             {/* Primary Heading */}

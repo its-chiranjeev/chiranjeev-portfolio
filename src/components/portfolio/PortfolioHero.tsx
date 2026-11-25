@@ -358,7 +358,7 @@ export function PortfolioHero({
                   <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-lime)]" />
                   <span>{name}</span>
                 </span>
-                <span className="text-[var(--text-tertiary)]">PORTRAIT // 01</span>
+                <span className="text-[var(--text-tertiary)]">Full-Stack Engineer</span>
               </div>
             </div>
 
@@ -371,7 +371,7 @@ export function PortfolioHero({
               <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5 sm:gap-3 mb-3 sm:mb-3.5">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[var(--border-subtle)] bg-[var(--bg-surface)] text-xs font-mono text-[var(--text-secondary)]">
                   <Terminal className="w-3.5 h-3.5 text-[var(--accent-lime)]" />
-                  <span>portfolio.main_view</span>
+                  <span>Software Engineering Portfolio</span>
                 </div>
                 <Badge variant="lime">Available for Opportunities</Badge>
               </div>

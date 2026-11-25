@@ -204,7 +204,7 @@ export function SkillsSection({ categories }: SkillsSectionProps) {
     <section id="skills" className="py-20 border-b border-[var(--border-subtle)]">
       <Container>
         <SectionHeading
-          badge="TECHNICAL TAXONOMY"
+          badge="MY TECHNICAL TOOLKIT"
           number="02"
           title="Skills & Engineering Proficiencies"
           description="Honest breakdown of technical proficiencies across frontend engineering, backend architectures, databases, cloud infrastructure, and computer science fundamentals."

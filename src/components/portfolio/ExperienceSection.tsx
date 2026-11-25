@@ -15,7 +15,7 @@ export function ExperienceSection({ experiences }: ExperienceSectionProps) {
     <section id="experience" className="py-20 border-b border-[var(--border-subtle)]">
       <Container>
         <SectionHeading
-          badge="EXPERIENCE"
+          badge="MY PROFESSIONAL JOURNEY"
           number="03"
           title="Professional Experience"
           description="Employment and independent development engineering history, focused on individual backend contributions."

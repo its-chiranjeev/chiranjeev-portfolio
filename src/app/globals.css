@@ -65,45 +65,45 @@
 
   [data-theme="light"],
   .light {
-    /* Clean Light Theme Palette */
-    --bg-canvas: #F8FAFC;
-    --bg-surface: #FFFFFF;
-    --bg-surface-elevated: #F1F5F9;
-    --bg-surface-subtle: #E2E8F0;
+    /* Sophisticated Comfortable Light Theme Palette */
+    --bg-canvas: #F5F5F7;           /* Soft, comfortable neutral page canvas (prevents glare) */
+    --bg-surface: #FFFFFF;          /* Pure crisp white card surface (creates tactile elevation) */
+    --bg-surface-elevated: #ECEEF2; /* Subtle elevated container surface for nested elements */
+    --bg-surface-subtle: #E2E4E9;   /* Muted tertiary container and subtle pill backgrounds */
 
-    --border-subtle: #DCE3EC;
-    --border-strong: #CBD5E1;
+    --border-subtle: #DDE0E6;       /* Tailored hairline borders for clean card definition */
+    --border-strong: #CBD0D8;       /* Defined interactive & hover border contrast */
 
-    --text-primary: #172033;
-    --text-secondary: #526078;
-    --text-tertiary: #5E6E87; /* 5.25:1 on white, 4.80:1 on elevated #F1F5F9 */
+    --text-primary: #111827;        /* Dark charcoal (17.7:1 AAA contrast on white, 16.3:1 on canvas) */
+    --text-secondary: #4B5565;      /* Balanced neutral body copy (7.5:1 AAA on white, 6.9:1 on canvas) */
+    --text-tertiary: #5B6675;       /* Crisp muted metadata (5.8:1 AA on white, 5.0+:1 on elevated) */
 
-    --accent-lime: #3F7D20;
-    --accent-lime-hover: #326719;
-    --accent-lime-muted: #EEF5E8;
-    --accent-lime-fg: #FFFFFF;
+    --accent-lime: #1B7339;         /* Sophisticated deep emerald green (5.9:1 AA contrast on white) */
+    --accent-lime-hover: #155C2D;   /* Rich deep green for hover states */
+    --accent-lime-muted: #EBF5EE;   /* Soft organic green wash for badge backgrounds */
+    --accent-lime-fg: #FFFFFF;      /* Pure white foreground on green solid buttons/badges */
 
     --card: #FFFFFF;
-    --card-border: #DCE3EC;
-    --ring: #3F7D20;
-    --focus-ring: #3F7D20;
+    --card-border: #DDE0E6;
+    --ring: #1B7339;
+    --focus-ring: #1B7339;
 
     /* Button Tokens (Light) */
-    --btn-primary-bg: #3F7D20;
+    --btn-primary-bg: #1B7339;
     --btn-primary-fg: #FFFFFF;
-    --btn-primary-hover: #326719;
+    --btn-primary-hover: #155C2D;
 
     --btn-secondary-bg: #FFFFFF;
-    --btn-secondary-fg: #172033;
-    --btn-secondary-border: #DCE3EC;
-    --btn-secondary-hover-bg: #F1F5F9;
-    --btn-secondary-hover-border: #CBD5E1;
+    --btn-secondary-fg: #111827;
+    --btn-secondary-border: #DDE0E6;
+    --btn-secondary-hover-bg: #ECEEF2;
+    --btn-secondary-hover-border: #CBD0D8;
 
-    --btn-tertiary-bg: #F1F5F9;
-    --btn-tertiary-fg: #526078;
-    --btn-tertiary-border: #DCE3EC;
-    --btn-tertiary-hover-bg: #E2E8F0;
-    --btn-tertiary-hover-fg: #172033;
+    --btn-tertiary-bg: #ECEEF2;
+    --btn-tertiary-fg: #4B5565;
+    --btn-tertiary-border: #DDE0E6;
+    --btn-tertiary-hover-bg: #E2E4E9;
+    --btn-tertiary-hover-fg: #111827;
 
     /* Restrained Layered Portrait Shadow */
     --shadow-portrait: 0 12px 28px rgba(15, 23, 42, 0.08), 0 3px 8px rgba(15, 23, 42, 0.04);

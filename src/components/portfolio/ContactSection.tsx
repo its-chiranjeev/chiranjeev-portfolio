@@ -16,7 +16,7 @@ export function ContactSection({ site }: ContactSectionProps) {
     <section id="contact" className="py-20 border-b border-[var(--border-subtle)]">
       <Container>
         <SectionHeading
-          badge="CONTACT"
+          badge="LET'S CONNECT"
           number="06"
           title="Direct Communication & Inquiries"
           description="Looking for opportunities in software engineering, full-stack development, and backend systems architecture."
@@ -30,7 +30,7 @@ export function ContactSection({ site }: ContactSectionProps) {
                 <div className="flex items-center justify-between gap-2 mb-6 text-xs font-mono text-[var(--text-tertiary)] border-b border-[var(--border-subtle)] pb-4">
                   <div className="flex items-center gap-2">
                     <Terminal className="w-4 h-4 text-[var(--accent-lime)]" />
-                    <span>inquiry.dispatch // compose</span>
+                    <span>Send a Direct Message</span>
                   </div>
                   <span className="text-[10px] text-[var(--accent-lime)] font-mono uppercase bg-[var(--accent-lime-muted)] px-2 py-0.5 rounded border border-[var(--accent-lime)]/20">
                     Web3Forms Ready
@@ -56,7 +56,7 @@ export function ContactSection({ site }: ContactSectionProps) {
                 <div>
                   <div className="flex items-center gap-2 mb-5 text-xs font-mono text-[var(--text-tertiary)] border-b border-[var(--border-subtle)] pb-4">
                     <Terminal className="w-4 h-4 text-[var(--accent-lime)]" />
-                    <span>contact.direct_channel // open</span>
+                    <span>Direct Channels & Socials</span>
                   </div>
 
                   <h3 className="text-xl font-bold text-[var(--text-primary)] mb-2.5">

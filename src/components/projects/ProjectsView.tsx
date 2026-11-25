@@ -44,7 +44,7 @@ export function ProjectsView({ projects }: ProjectsViewProps) {
 
           <span className="text-[11px] font-mono text-[var(--text-tertiary)] hidden sm:inline-flex items-center gap-1.5">
             <Terminal className="w-3.5 h-3.5 text-[var(--accent-lime)]" />
-            <span>ARCHIVE // TOTAL_ENTRIES: {projects.length}</span>
+            <span>Total Projects: {projects.length}</span>
           </span>
         </div>
 
@@ -52,7 +52,7 @@ export function ProjectsView({ projects }: ProjectsViewProps) {
         <div className="mb-12 border-b border-[var(--border-subtle)] pb-10">
           <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-[var(--bg-surface-elevated)] border border-[var(--border-subtle)] text-[11px] font-mono text-[var(--accent-lime)] mb-4">
             <FolderGit2 className="w-3.5 h-3.5" />
-            <span>SYSTEM_REPOSITORY // ALL_PROJECTS</span>
+            <span>Curated Project Catalog</span>
           </div>
 
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[var(--text-primary)] mb-4">
@@ -67,7 +67,7 @@ export function ProjectsView({ projects }: ProjectsViewProps) {
           <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-[var(--text-tertiary)]">
             <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-subtle)]">
               <span className="w-2 h-2 rounded-full bg-[var(--accent-lime)]" />
-              <span>Published Systems:</span>
+              <span>Published Projects:</span>
               <strong className="text-[var(--text-primary)] font-semibold">{projects.length}</strong>
             </span>
 

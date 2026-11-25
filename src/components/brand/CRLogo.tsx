@@ -143,7 +143,7 @@ export function CRLogo({
           </span>
           <span className="text-[10px] tracking-widest uppercase text-[var(--accent-lime)] font-semibold flex items-center justify-center gap-1.5 mt-0.5">
             <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-lime)] animate-ping" />
-            CR//SYSTEM_INIT
+            SOFTWARE ENGINEER
           </span>
         </div>
       </div>
