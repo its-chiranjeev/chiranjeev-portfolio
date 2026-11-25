@@ -93,7 +93,10 @@ export function BottomSheet({
 
   // Handle body scroll lock
   useEffect(() => {
-    if (!isOpen && !isClosing) return;
+    if (!isOpen || isClosing) {
+      document.body.style.overflow = "";
+      return;
+    }
 
     const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";

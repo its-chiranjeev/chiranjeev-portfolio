@@ -25,6 +25,8 @@ export interface CRLogoProps {
   className?: string;
   /** Optional link destination if clickable (navbar defaults to /portfolio) */
   href?: string;
+  /** Optional click handler for anchor Link */
+  onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
   /** Additional accessible label */
   ariaLabel?: string;
 }
@@ -115,6 +117,7 @@ export function CRLogo({
   subtitle = "Software Engineer",
   className = "",
   href,
+  onClick,
   ariaLabel = "Chiranjeev Rastogi - Home",
 }: CRLogoProps) {
   // 1. Loading Screen Variant
@@ -173,7 +176,7 @@ export function CRLogo({
 
     if (href) {
       return (
-        <Link href={href} aria-label={ariaLabel}>
+        <Link href={href} onClick={onClick} aria-label={ariaLabel}>
           {content}
         </Link>
       );
@@ -209,7 +212,7 @@ export function CRLogo({
 
     if (href) {
       return (
-        <Link href={href} aria-label={ariaLabel}>
+        <Link href={href} onClick={onClick} aria-label={ariaLabel}>
           {content}
         </Link>
       );
@@ -234,7 +237,7 @@ export function CRLogo({
 
   if (href) {
     return (
-      <Link href={href} aria-label={ariaLabel}>
+      <Link href={href} onClick={onClick} aria-label={ariaLabel}>
         {monogramContent}
       </Link>
     );

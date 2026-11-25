@@ -9,6 +9,7 @@ import { getResolvedTechnologies } from "@/lib/skills";
 import { TechnologyInfoPanel } from "@/components/skills/TechnologyInfoPanel";
 import { Filter, ChevronDown } from "lucide-react";
 import { BottomSheet, BottomSheetOption } from "@/components/ui/BottomSheet";
+import { scrollToTarget } from "@/lib/smoothScroll";
 
 const CATEGORY_SHORT_TITLES: Record<string, string> = {
   all: "All Categories",
@@ -166,6 +167,18 @@ export function SkillsSection({ categories }: SkillsSectionProps) {
         }
       }
     }
+
+    // Ensure newly filtered content is rendered before scrolling begins
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        scrollToTarget("#technology-details", {
+          offset: 80,
+          duration: 0.9,
+          ease: "power2.inOut",
+          updateHash: false,
+        });
+      });
+    });
   };
 
   // Synchronized related technology selection handler
@@ -312,7 +325,7 @@ export function SkillsSection({ categories }: SkillsSectionProps) {
             </div>
 
             {/* Full-Width Selected Technology Detail Panel Beneath Grid */}
-            <div className="mt-8">
+            <div className="mt-8" id="technology-analysis">
               <TechnologyInfoPanel
                 selectedTech={selectedTech}
                 onSelectRelated={handleSelectRelatedByName}
@@ -338,7 +351,7 @@ export function SkillsSection({ categories }: SkillsSectionProps) {
             </div>
 
             {/* Right Column: Technology Analysis Panel (~58% on desktop) */}
-            <div className="lg:col-span-7 w-full">
+            <div className="lg:col-span-7 w-full" id="technology-analysis">
               <TechnologyInfoPanel
                 selectedTech={selectedTech}
                 onSelectRelated={handleSelectRelatedByName}
