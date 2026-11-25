@@ -31,7 +31,11 @@ export function TechnologyInfoPanel({
   if (!selectedTech) {
     if (isSideBySide) {
       return (
-        <div className="w-full p-6 sm:p-8 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] shadow-sm space-y-3">
+        <div
+          id="technology-details"
+          data-section="technology-analysis"
+          className="w-full p-6 sm:p-8 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] shadow-sm space-y-3"
+        >
           <div className="flex items-center gap-2 text-xs font-mono text-[var(--accent-lime)]">
             <Sparkles className="w-3.5 h-3.5" />
             <span>TECHNOLOGY ANALYSIS</span>
@@ -48,7 +52,11 @@ export function TechnologyInfoPanel({
     }
 
     return (
-      <div className="w-full p-6 sm:p-8 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] shadow-sm">
+      <div
+        id="technology-details"
+        data-section="technology-analysis"
+        className="w-full p-6 sm:p-8 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] shadow-sm"
+      >
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div className="space-y-1.5 max-w-xl">
             <div className="flex items-center gap-2 text-xs font-mono text-[var(--accent-lime)]">
@@ -92,6 +100,7 @@ export function TechnologyInfoPanel({
   return (
     <div
       id="technology-details"
+      data-section="technology-analysis"
       className="w-full p-6 sm:p-7 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-strong)]/80 shadow-lg scroll-mt-28 transition-all"
     >
       {/* Top Header Row */}

@@ -7,6 +7,9 @@ import { Card } from "@/components/ui/Card";
 import { SkillCategory, ResolvedTechnology } from "@/types/skill";
 import { getResolvedTechnologies } from "@/lib/skills";
 import { TechnologyInfoPanel } from "@/components/skills/TechnologyInfoPanel";
+import { Filter, ChevronDown } from "lucide-react";
+import { BottomSheet, BottomSheetOption } from "@/components/ui/BottomSheet";
+import { scrollToTarget } from "@/lib/smoothScroll";
 
 const CATEGORY_SHORT_TITLES: Record<string, string> = {
   all: "All Categories",
@@ -164,6 +167,18 @@ export function SkillsSection({ categories }: SkillsSectionProps) {
         }
       }
     }
+
+    // Ensure newly filtered content is rendered before scrolling begins
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        scrollToTarget("#technology-details", {
+          offset: 80,
+          duration: 0.9,
+          ease: "power2.inOut",
+          updateHash: false,
+        });
+      });
+    });
   };
 
   // Synchronized related technology selection handler
@@ -200,6 +215,19 @@ export function SkillsSection({ categories }: SkillsSectionProps) {
     ];
   }, [categories, allResolvedTechnologies]);
 
+  const [isFilterSheetOpen, setIsFilterSheetOpen] = useState(false);
+
+  const activeFilter =
+    categoryFilters.find((f) => f.id === activeCategoryId) || categoryFilters[0];
+
+  const bottomSheetOptions: BottomSheetOption[] = useMemo(() => {
+    return categoryFilters.map((f) => ({
+      id: f.id,
+      label: f.title,
+      count: f.count,
+    }));
+  }, [categoryFilters]);
+
   return (
     <section id="skills" className="py-20 border-b border-[var(--border-subtle)]">
       <Container>
@@ -210,9 +238,35 @@ export function SkillsSection({ categories }: SkillsSectionProps) {
           description="Honest breakdown of technical proficiencies across frontend engineering, backend architectures, databases, cloud infrastructure, and computer science fundamentals."
         />
 
-        {/* Category Filter Navigation */}
-        <div className="w-full overflow-x-auto pb-3 mb-8 scrollbar-none border-b border-[var(--border-subtle)]">
-          <div className="flex items-center gap-2 flex-nowrap sm:flex-wrap min-w-max sm:min-w-0">
+        {/* Mobile Filter Trigger (Below sm) */}
+        <div className="sm:hidden mb-6">
+          <button
+            type="button"
+            onClick={() => setIsFilterSheetOpen(true)}
+            className="w-full flex items-center justify-between px-4 py-3 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-xs font-mono text-[var(--text-primary)] hover:border-[var(--accent-lime)] transition-colors cursor-pointer shadow-xs min-h-[48px]"
+            aria-label="Filter skills by category"
+            aria-haspopup="dialog"
+            aria-expanded={isFilterSheetOpen}
+          >
+            <div className="flex items-center gap-2.5 min-w-0 pr-2">
+              <Filter className="w-4 h-4 text-[var(--accent-lime)] shrink-0" />
+              <span className="text-[11px] text-[var(--text-tertiary)] uppercase tracking-wider shrink-0">
+                Category:
+              </span>
+              <span className="font-bold text-xs text-[var(--text-primary)] truncate">
+                {activeFilter.title}
+              </span>
+              <span className="text-[10px] px-1.5 py-0.2 rounded-full font-mono bg-[var(--bg-surface-elevated)] text-[var(--text-secondary)] border border-[var(--border-subtle)] shrink-0">
+                {activeFilter.count}
+              </span>
+            </div>
+            <ChevronDown className="w-4 h-4 text-[var(--text-tertiary)] shrink-0" />
+          </button>
+        </div>
+
+        {/* Desktop Category Filter Navigation (sm and Above) */}
+        <div className="hidden sm:block w-full mb-8 border-b border-[var(--border-subtle)]">
+          <div className="w-full flex items-center gap-2.5 pb-2 sm:flex-wrap">
             {categoryFilters.map((filter) => {
               const isActive = activeCategoryId === filter.id;
               return (
@@ -220,9 +274,9 @@ export function SkillsSection({ categories }: SkillsSectionProps) {
                   key={filter.id}
                   type="button"
                   onClick={() => handleCategoryChange(filter.id)}
-                  className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono whitespace-nowrap cursor-pointer transition-all border ${
+                  className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono shrink-0 whitespace-nowrap cursor-pointer transition-all border ${
                     isActive
-                      ? "bg-[var(--accent-lime)] text-[var(--accent-lime-fg)] border-[var(--accent-lime)] font-bold shadow-xs"
+                      ? "bg-[var(--accent-lime)] text-[var(--accent-lime-fg)] border-[var(--accent-lime)] font-bold shadow-xs shadow-[0_0_12px_rgba(163,230,53,0.25)]"
                       : "bg-[var(--bg-surface-elevated)] text-[var(--text-secondary)] border-[var(--border-subtle)] hover:text-[var(--text-primary)] hover:border-[var(--border-strong)]"
                   }`}
                 >
@@ -242,6 +296,17 @@ export function SkillsSection({ categories }: SkillsSectionProps) {
           </div>
         </div>
 
+        {/* Mobile Bottom Sheet Filter Dialog */}
+        <BottomSheet
+          isOpen={isFilterSheetOpen}
+          onClose={() => setIsFilterSheetOpen(false)}
+          title="Select Skill Category"
+          description="Filter proficiencies by engineering domain"
+          options={bottomSheetOptions}
+          selectedId={activeCategoryId}
+          onSelect={(id) => handleCategoryChange(id)}
+        />
+
         {/* Dynamic Layout: All Categories (3-Col Grid) vs Single Category (Side-by-Side 42% / 58%) */}
         {activeCategoryId === "all" ? (
           <>
@@ -260,7 +325,7 @@ export function SkillsSection({ categories }: SkillsSectionProps) {
             </div>
 
             {/* Full-Width Selected Technology Detail Panel Beneath Grid */}
-            <div className="mt-8">
+            <div className="mt-8" id="technology-analysis">
               <TechnologyInfoPanel
                 selectedTech={selectedTech}
                 onSelectRelated={handleSelectRelatedByName}
@@ -286,7 +351,7 @@ export function SkillsSection({ categories }: SkillsSectionProps) {
             </div>
 
             {/* Right Column: Technology Analysis Panel (~58% on desktop) */}
-            <div className="lg:col-span-7 w-full">
+            <div className="lg:col-span-7 w-full" id="technology-analysis">
               <TechnologyInfoPanel
                 selectedTech={selectedTech}
                 onSelectRelated={handleSelectRelatedByName}

@@ -280,6 +280,7 @@ export function PortfolioHero({
   return (
     <section
       ref={sectionRef}
+      id="hero"
       className="relative border-b border-[var(--border-subtle)] bg-[var(--bg-canvas)] overflow-x-clip"
     >
       {/* Background subtle radial ambient glow */}
