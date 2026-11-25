@@ -310,7 +310,7 @@ export function TechnologyInfoPanel({
 
             {selectedTech.aliases.length > 0 && (
               <p className="text-xs font-mono text-[var(--text-tertiary)] pt-1">
-                Project techStack alias:{" "}
+                Alternative name:{" "}
                 <span className="text-[var(--text-secondary)] font-medium">
                   {selectedTech.aliases.join(", ")}
                 </span>

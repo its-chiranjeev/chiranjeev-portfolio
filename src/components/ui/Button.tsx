@@ -68,12 +68,27 @@ export function Button({
   if ("href" in props && typeof props.href === "string") {
     const { href, target, rel, download } = props;
     const isExternal = href.startsWith("http") || href.startsWith("mailto:");
+    const isDirectLink = isExternal || Boolean(download) || href.startsWith("#") || href.endsWith(".pdf");
+
+    if (isDirectLink) {
+      return (
+        <a
+          href={href}
+          target={target || (isExternal && !href.startsWith("mailto:") ? "_blank" : undefined)}
+          rel={rel || (isExternal ? "noopener noreferrer" : undefined)}
+          download={download}
+          className={combinedClassName}
+        >
+          {children}
+        </a>
+      );
+    }
 
     return (
       <Link
         href={href}
-        target={target || (isExternal && !href.startsWith("mailto:") ? "_blank" : undefined)}
-        rel={rel || (isExternal ? "noopener noreferrer" : undefined)}
+        target={target}
+        rel={rel}
         download={download}
         className={combinedClassName}
       >

@@ -1,17 +1,13 @@
-import { env, getAbsoluteUrl } from "@/lib/env";
 import { getAllProjects } from "@/lib/projects";
 import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  if (!env.siteUrl) {
-    // Avoid publishing an unconfirmed or placeholder domain in production sitemaps.
-    return [];
-  }
+  const siteUrl = (process.env.SITE_URL?.trim() || "http://localhost:3000").replace(/\/+$/, "");
 
   const publishedProjects = getAllProjects();
 
   const projectRoutes: MetadataRoute.Sitemap = publishedProjects.map((project) => ({
-    url: getAbsoluteUrl(`/projects/${project.slug}`)!,
+    url: `${siteUrl}/projects/${project.slug}`,
     lastModified: new Date(),
     changeFrequency: "monthly",
     priority: 0.8,
@@ -19,19 +15,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const staticRoutes: MetadataRoute.Sitemap = [
     {
-      url: getAbsoluteUrl("/")!,
+      url: `${siteUrl}/`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 1.0,
     },
     {
-      url: getAbsoluteUrl("/portfolio")!,
+      url: `${siteUrl}/portfolio`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
-      url: getAbsoluteUrl("/projects")!,
+      url: `${siteUrl}/projects`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.85,

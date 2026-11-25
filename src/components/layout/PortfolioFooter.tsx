@@ -2,12 +2,16 @@ import { Container } from "@/components/ui/Container";
 import { GithubIcon, LinkedinIcon, XIcon, InstagramIcon, LeetCodeIcon } from "@/components/ui/icons";
 import { CRLogo } from "@/components/brand/CRLogo";
 import { ArrowUp, Mail } from "lucide-react";
-import Link from "next/link";
 import { getSiteConfig } from "@/lib/content";
 
-export function PortfolioFooter() {
+interface PortfolioFooterProps {
+  isPortfolioPage?: boolean;
+}
+
+export function PortfolioFooter({ isPortfolioPage = false }: PortfolioFooterProps) {
   const currentYear = new Date().getFullYear();
   const site = getSiteConfig();
+  const basePath = isPortfolioPage ? "" : "/portfolio";
 
   return (
     <footer className="border-t border-[var(--border-subtle)] bg-[var(--bg-canvas)] py-12 text-xs font-mono text-[var(--text-tertiary)]">
@@ -28,24 +32,24 @@ export function PortfolioFooter() {
 
           {/* Center: In-page navigation */}
           <nav aria-label="Footer Navigation" className="flex flex-wrap items-center justify-center gap-5 text-[var(--text-secondary)]">
-            <Link href="/portfolio#about" className="hover:text-[var(--accent-lime)] transition-colors">
+            <a href={`${basePath}#about`} className="hover:text-[var(--accent-lime)] transition-colors">
               About
-            </Link>
-            <Link href="/portfolio#skills" className="hover:text-[var(--accent-lime)] transition-colors">
+            </a>
+            <a href={`${basePath}#skills`} className="hover:text-[var(--accent-lime)] transition-colors">
               Skills
-            </Link>
-            <Link href="/portfolio#experience" className="hover:text-[var(--accent-lime)] transition-colors">
+            </a>
+            <a href={`${basePath}#experience`} className="hover:text-[var(--accent-lime)] transition-colors">
               Experience
-            </Link>
-            <Link href="/portfolio#projects" className="hover:text-[var(--accent-lime)] transition-colors">
+            </a>
+            <a href={`${basePath}#projects`} className="hover:text-[var(--accent-lime)] transition-colors">
               Projects
-            </Link>
-            <Link href="/portfolio#education" className="hover:text-[var(--accent-lime)] transition-colors">
+            </a>
+            <a href={`${basePath}#education`} className="hover:text-[var(--accent-lime)] transition-colors">
               Education
-            </Link>
-            <Link href="/portfolio#contact" className="hover:text-[var(--accent-lime)] transition-colors">
+            </a>
+            <a href={`${basePath}#contact`} className="hover:text-[var(--accent-lime)] transition-colors">
               Contact
-            </Link>
+            </a>
           </nav>
 
           {/* Right: Actions */}

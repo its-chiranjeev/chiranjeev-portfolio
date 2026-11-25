@@ -18,7 +18,7 @@ export function EducationSection({
     <section id="education" className="py-20 border-b border-[var(--border-subtle)]">
       <Container>
         <SectionHeading
-          badge="EDUCATION"
+          badge="ACADEMIC BACKGROUND"
           number="05"
           title="Academic Credentials & Certifications"
           description="Formal academic degrees in computer applications and verified technical certifications."
