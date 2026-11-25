@@ -6,7 +6,6 @@ import { ProjectNavigation } from "@/components/projects/ProjectNavigation";
 import { ProjectSectionRenderer } from "@/components/projects/ProjectSectionRenderer";
 import { Container } from "@/components/ui/Container";
 import { getAdjacentProjects, getAllProjects, getProjectBySlug, isProjectPublished } from "@/lib/projects";
-import { getAbsoluteUrl } from "@/lib/env";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -32,7 +31,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  const canonicalUrl = getAbsoluteUrl(`/projects/${project.slug}`);
+  const siteUrl = (process.env.SITE_URL?.trim() || "http://localhost:3000").replace(/\/+$/, "");
+  const canonicalUrl = `${siteUrl}/projects/${project.slug}`;
 
   return {
     title: `${project.title} — Technical Case Study | Chiranjeev Rastogi`,

@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -6,7 +5,7 @@ import { ContactForm } from "./ContactForm";
 import { CopyEmailButton } from "./CopyEmailButton";
 import { GithubIcon, LinkedinIcon, XIcon, InstagramIcon, LeetCodeIcon } from "@/components/ui/icons";
 import { SiteConfig } from "@/types/site";
-import { Clock, Mail, MapPin, Phone, Terminal } from "lucide-react";
+import { Clock, Mail, MapPin, Phone, Send, Terminal } from "lucide-react";
 
 interface ContactSectionProps {
   site: SiteConfig;
@@ -71,29 +70,35 @@ export function ContactSection({ site }: ContactSectionProps) {
                   {/* Direct Channels Stack */}
                   <div className="space-y-4 mb-6">
                     {/* Email Card */}
-                    <div className="p-4 rounded-xl bg-[var(--bg-surface-elevated)] border border-[var(--border-subtle)] flex flex-col justify-between">
-                      <div>
-                        <div className="flex items-center gap-2 mb-1.5 text-xs font-mono text-[var(--text-tertiary)]">
-                          <Mail className="w-3.5 h-3.5 text-[var(--accent-lime)]" />
+                    <div className="p-4 rounded-xl bg-[var(--bg-surface-elevated)] border border-[var(--border-subtle)] space-y-2">
+                      <div className="flex items-center justify-between gap-3">
+                        <div className="flex items-center gap-2 text-xs font-mono text-[var(--text-tertiary)]">
+                          <Mail className="w-3.5 h-3.5 text-[var(--accent-lime)]" aria-hidden="true" />
                           <span>Primary Email</span>
                         </div>
+
+                        {/* Top-Right Compact Icon-Only Actions */}
+                        <div className="flex items-center gap-2 shrink-0">
+                          <a
+                            href={`mailto:${site.email}`}
+                            aria-label={`Send email to ${site.email}`}
+                            title={`Send email to ${site.email}`}
+                            className="relative inline-flex items-center justify-center w-9 h-9 sm:w-8 sm:h-8 rounded-lg border border-[var(--btn-tertiary-border)] bg-[var(--btn-tertiary-bg)] hover:bg-[var(--btn-tertiary-hover-bg)] hover:border-[var(--border-strong)] text-[var(--btn-tertiary-fg)] hover:text-[var(--btn-tertiary-hover-fg)] transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] after:absolute after:-inset-1 sm:after:hidden after:content-['']"
+                          >
+                            <Send className="w-3.5 h-3.5" aria-hidden="true" />
+                            <span className="sr-only">Send email to {site.email}</span>
+                          </a>
+                          <CopyEmailButton email={site.email} />
+                        </div>
+                      </div>
+
+                      <div>
                         <a
                           href={`mailto:${site.email}`}
-                          className="font-mono text-sm font-semibold text-[var(--text-primary)] hover:text-[var(--accent-lime)] transition-colors break-all"
+                          className="font-mono text-sm sm:text-base font-semibold text-[var(--text-primary)] hover:text-[var(--accent-lime)] transition-colors break-all"
                         >
                           {site.email}
                         </a>
-                      </div>
-                      <div className="mt-4 flex items-center justify-between gap-2">
-                        <Button
-                          href={`mailto:${site.email}`}
-                          variant="primary"
-                          size="sm"
-                          className="font-mono text-xs"
-                        >
-                          Send Email
-                        </Button>
-                        <CopyEmailButton email={site.email} />
                       </div>
                     </div>
 

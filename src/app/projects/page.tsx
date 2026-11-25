@@ -2,10 +2,10 @@ import { PortfolioNavbar } from "@/components/layout/PortfolioNavbar";
 import { PortfolioFooter } from "@/components/layout/PortfolioFooter";
 import { ProjectsView } from "@/components/projects/ProjectsView";
 import { getAllProjects } from "@/lib/projects";
-import { getAbsoluteUrl } from "@/lib/env";
 import type { Metadata } from "next";
 
-const canonicalUrl = getAbsoluteUrl("/projects");
+const siteUrl = (process.env.SITE_URL?.trim() || "http://localhost:3000").replace(/\/+$/, "");
+const canonicalUrl = `${siteUrl}/projects`;
 
 export const metadata: Metadata = {
   title: "All Projects",

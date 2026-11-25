@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { Geist, JetBrains_Mono } from "next/font/google";
+import { Geist, JetBrains_Mono, Caveat, Noto_Sans_Devanagari } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
-import { env } from "@/lib/env";
+import { IntroController } from "@/components/loader/IntroController";
 import { getSiteConfig } from "@/lib/content";
 
 const geistSans = Geist({
@@ -17,8 +17,24 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+const caveat = Caveat({
+  variable: "--font-caveat",
+  subsets: ["latin"],
+  display: "swap",
+  weight: "400",
+  preload: false,
+});
+
+const notoSansDevanagari = Noto_Sans_Devanagari({
+  variable: "--font-noto-devanagari",
+  subsets: ["devanagari"],
+  display: "swap",
+  weight: "500",
+  preload: false,
+});
+
 const site = getSiteConfig();
-const siteUrl = env.siteUrl;
+const siteUrl = (process.env.SITE_URL?.trim() || "http://localhost:3000").replace(/\/+$/, "");
 
 export const metadata: Metadata = {
   title: {
@@ -28,9 +44,9 @@ export const metadata: Metadata = {
   description:
     "Portfolio of Chiranjeev Rastogi — Software Engineer & Full-Stack Developer specializing in full-stack web applications, scalable backend architectures, and distributed systems with Next.js, Node.js, NestJS, and TypeScript.",
   applicationName: "Chiranjeev Rastogi Portfolio",
-  authors: [{ name: site.name, url: siteUrl || undefined }],
+  authors: [{ name: site.name, url: siteUrl }],
   creator: site.name,
-  metadataBase: new URL(siteUrl || "http://localhost:3000"),
+  metadataBase: new URL(siteUrl),
   robots: {
     index: true,
     follow: true,
@@ -95,6 +111,21 @@ const themeScript = `(function() {
   } catch (e) {}
 })();`;
 
+const introInitScript = `(function() {
+  try {
+    var isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (isReducedMotion) return;
+
+    var pathname = window.location.pathname;
+    var isRoot = pathname === "/" || pathname === "";
+    var seen = sessionStorage.getItem('chiranjeev_intro_seen');
+
+    if (isRoot || !seen) {
+      document.documentElement.classList.add('intro-active');
+    }
+  } catch (e) {}
+})();`;
+
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
@@ -140,10 +171,11 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${geistSans.variable} ${jetbrainsMono.variable}`}
+      className={`${geistSans.variable} ${jetbrainsMono.variable} ${caveat.variable} ${notoSansDevanagari.variable}`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script dangerouslySetInnerHTML={{ __html: introInitScript }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -157,7 +189,9 @@ export default function RootLayout({
         >
           Skip to main content
         </a>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <IntroController>{children}</IntroController>
+        </ThemeProvider>
       </body>
     </html>
   );

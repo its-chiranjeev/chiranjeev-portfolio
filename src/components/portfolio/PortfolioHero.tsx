@@ -13,12 +13,6 @@ import {
   Server,
   MapPin,
 } from "lucide-react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
 
 interface PortfolioHeroProps {
   name: string;
@@ -100,171 +94,186 @@ export function PortfolioHero({
     };
   }, []);
 
-  // GSAP ScrollTrigger Cinematic Scrubbed Timeline
+  // GSAP ScrollTrigger Cinematic Scrubbed Timeline (Desktop only, loaded on demand)
   useEffect(() => {
     if (typeof window === "undefined") return;
 
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (mediaQuery.matches) {
-      // Respect accessibility: Leave layout in static settled position
-      gsap.set([portraitWrapperRef.current, rightContentRef.current], { clearProps: "all" });
-      return;
-    }
+    if (mediaQuery.matches) return;
 
-    const sectionEl = sectionRef.current;
-    const pinStageEl = pinStageRef.current;
-    const portraitEl = portraitWrapperRef.current;
-    const rightContentEl = rightContentRef.current;
-    const initialMetaEl = initialMetaRef.current;
-    const watermarkEl = watermarkRef.current;
+    let isMounted = true;
+    let mmInstance: { revert: () => void } | null = null;
 
-    if (!sectionEl || !pinStageEl || !portraitEl || !rightContentEl) return;
+    const initAnimation = async () => {
+      if (window.innerWidth < 1024 || mmInstance) return;
 
-    const mm = gsap.matchMedia();
+      const [{ default: gsap }, { ScrollTrigger }] = await Promise.all([
+        import("gsap"),
+        import("gsap/ScrollTrigger"),
+      ]);
 
-    // 1. DESKTOP ANIMATION (>= 1024px): Immersive scrubbed cinematic pinning timeline
-    mm.add("(min-width: 1024px)", () => {
-      // Compute geometric offsets for smooth cinematic centering at 0%
-      const containerRect = pinStageEl.getBoundingClientRect();
-      const portraitRect = portraitEl.getBoundingClientRect();
+      if (!isMounted) return;
+      gsap.registerPlugin(ScrollTrigger);
 
-      const stageCenterX = containerRect.width / 2;
-      const portraitCenterX = (portraitRect.left - containerRect.left) + portraitRect.width / 2;
-      const deltaX = stageCenterX - portraitCenterX;
-      const deltaY = 48; // Head appears lower initially matching downward gaze
-      const initialScale = 1.16;
-      const scrollDistance = 1300;
+      const sectionEl = sectionRef.current;
+      const pinStageEl = pinStageRef.current;
+      const portraitEl = portraitWrapperRef.current;
+      const rightContentEl = rightContentRef.current;
+      const initialMetaEl = initialMetaRef.current;
+      const watermarkEl = watermarkRef.current;
 
-      // Initial visual setup for scroll 0% managed entirely by GSAP
-      gsap.set(portraitEl, { x: deltaX, y: deltaY, scale: initialScale });
-      gsap.set(rightContentEl, { opacity: 0, y: 35, pointerEvents: "none" });
-      if (initialMetaEl) gsap.set(initialMetaEl, { opacity: 1, y: 0 });
-      if (watermarkEl) gsap.set(watermarkEl, { opacity: 0.05, scale: 1 });
+      if (!sectionEl || !pinStageEl || !portraitEl || !rightContentEl) return;
 
-      // Master Scroll-Driven Timeline
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionEl,
-          start: "top 64px",
-          end: `+=${scrollDistance}`,
-          pin: pinStageEl,
-          scrub: 0.8,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
-        },
+      const mm = gsap.matchMedia();
+      mmInstance = mm;
+
+      // 1. DESKTOP ANIMATION (>= 1024px): Immersive scrubbed cinematic pinning timeline
+      mm.add("(min-width: 1024px)", () => {
+        // Compute geometric offsets for smooth cinematic centering at 0%
+        const containerRect = pinStageEl.getBoundingClientRect();
+        const portraitRect = portraitEl.getBoundingClientRect();
+
+        const stageCenterX = containerRect.width / 2;
+        const portraitCenterX = (portraitRect.left - containerRect.left) + portraitRect.width / 2;
+        const deltaX = stageCenterX - portraitCenterX;
+        const deltaY = 48; // Head appears lower initially matching downward gaze
+        const initialScale = 1.16;
+        const scrollDistance = 1300;
+
+        // Initial visual setup for scroll 0% managed entirely by GSAP
+        gsap.set(portraitEl, { x: deltaX, y: deltaY, scale: initialScale });
+        gsap.set(rightContentEl, { opacity: 0, y: 35, pointerEvents: "none" });
+        if (initialMetaEl) gsap.set(initialMetaEl, { opacity: 1, y: 0 });
+        if (watermarkEl) gsap.set(watermarkEl, { opacity: 0.05, scale: 1 });
+
+        // Master Scroll-Driven Timeline
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionEl,
+            start: "top 64px",
+            end: `+=${scrollDistance}`,
+            pin: pinStageEl,
+            scrub: 0.8,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+          },
+        });
+
+        // Pointer events enabled automatically at 72% scroll progression (reverses on backward scrub)
+        tl.set(rightContentEl, { pointerEvents: "auto" }, 0.72);
+
+        // Stage 1 (0% -> 25%):
+        // - Portrait begins moving upward
+        // - Scale begins gentle adjustment
+        // - Large name typography & initial cues transition away
+        if (initialMetaEl) {
+          tl.to(initialMetaEl, { opacity: 0, y: -20, duration: 0.2, ease: "power1.out" }, 0);
+        }
+        if (watermarkEl) {
+          tl.to(watermarkEl, { opacity: 0, scale: 1.05, duration: 0.35, ease: "power1.out" }, 0);
+        }
+        tl.to(
+          portraitEl,
+          {
+            x: deltaX * 0.78,
+            y: deltaY * 0.35,
+            scale: initialScale * 0.97,
+            duration: 0.25,
+            ease: "power1.inOut",
+          },
+          0
+        );
+
+        // Stage 2 (25% -> 50%):
+        // - Portrait moves diagonally upward and towards the left
+        // - Right content starts revealing gradually
+        tl.to(
+          portraitEl,
+          {
+            x: deltaX * 0.35,
+            y: 12,
+            scale: 1.03,
+            duration: 0.25,
+            ease: "power1.inOut",
+          },
+          0.25
+        );
+        tl.to(
+          rightContentEl,
+          {
+            opacity: 0.45,
+            y: 18,
+            duration: 0.25,
+            ease: "power1.out",
+          },
+          0.25
+        );
+
+        // Stage 3 (50% -> 75%):
+        // - Portrait continues moving towards left, creating balanced composition
+        // - Right content reveals further with staggered elements
+        tl.to(
+          portraitEl,
+          {
+            x: deltaX * 0.08,
+            y: 0,
+            scale: 1.01,
+            duration: 0.25,
+            ease: "power1.out",
+          },
+          0.5
+        );
+        tl.to(
+          rightContentEl,
+          {
+            opacity: 0.85,
+            y: 6,
+            duration: 0.25,
+            ease: "power1.out",
+          },
+          0.5
+        );
+
+        // Stage 4 (75% -> 100%):
+        // - Portrait settles cleanly into its final left-side natural position
+        // - Right introduction reaches full visibility and interactive controls
+        tl.to(
+          portraitEl,
+          {
+            x: 0,
+            y: 0,
+            scale: 1.0,
+            duration: 0.25,
+            ease: "power2.out",
+          },
+          0.75
+        );
+        tl.to(
+          rightContentEl,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.25,
+            ease: "power2.out",
+          },
+          0.75
+        );
       });
+    };
 
-      // Pointer events enabled automatically at 72% scroll progression (reverses on backward scrub)
-      tl.set(rightContentEl, { pointerEvents: "auto" }, 0.72);
+    initAnimation();
 
-      // Stage 1 (0% -> 25%):
-      // - Portrait begins moving upward
-      // - Scale begins gentle adjustment
-      // - Large name typography & initial cues transition away
-      if (initialMetaEl) {
-        tl.to(initialMetaEl, { opacity: 0, y: -20, duration: 0.2, ease: "power1.out" }, 0);
+    const handleResize = () => {
+      if (window.innerWidth >= 1024 && !mmInstance) {
+        initAnimation();
       }
-      if (watermarkEl) {
-        tl.to(watermarkEl, { opacity: 0, scale: 1.05, duration: 0.35, ease: "power1.out" }, 0);
-      }
-      tl.to(
-        portraitEl,
-        {
-          x: deltaX * 0.78,
-          y: deltaY * 0.35,
-          scale: initialScale * 0.97,
-          duration: 0.25,
-          ease: "power1.inOut",
-        },
-        0
-      );
-
-      // Stage 2 (25% -> 50%):
-      // - Portrait moves diagonally upward and towards the left
-      // - Right content starts revealing gradually
-      tl.to(
-        portraitEl,
-        {
-          x: deltaX * 0.35,
-          y: 12,
-          scale: 1.03,
-          duration: 0.25,
-          ease: "power1.inOut",
-        },
-        0.25
-      );
-      tl.to(
-        rightContentEl,
-        {
-          opacity: 0.45,
-          y: 18,
-          duration: 0.25,
-          ease: "power1.out",
-        },
-        0.25
-      );
-
-      // Stage 3 (50% -> 75%):
-      // - Portrait continues moving towards left, creating balanced composition
-      // - Right content reveals further with staggered elements
-      tl.to(
-        portraitEl,
-        {
-          x: deltaX * 0.08,
-          y: 0,
-          scale: 1.01,
-          duration: 0.25,
-          ease: "power1.out",
-        },
-        0.5
-      );
-      tl.to(
-        rightContentEl,
-        {
-          opacity: 0.85,
-          y: 6,
-          duration: 0.25,
-          ease: "power1.out",
-        },
-        0.5
-      );
-
-      // Stage 4 (75% -> 100%):
-      // - Portrait settles cleanly into its final left-side natural position
-      // - Right introduction reaches full visibility and interactive controls
-      tl.to(
-        portraitEl,
-        {
-          x: 0,
-          y: 0,
-          scale: 1.0,
-          duration: 0.25,
-          ease: "power2.out",
-        },
-        0.75
-      );
-      tl.to(
-        rightContentEl,
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.25,
-          ease: "power2.out",
-        },
-        0.75
-      );
-    });
-
-    // 2. MOBILE / TABLET (< 1024px): Natural document flow, zero horizontal displacement, 100% stable visibility
-    mm.add("(max-width: 1023px)", () => {
-      // Clear all GSAP inline styles to restore natural document flow and full visibility
-      gsap.set([portraitEl, rightContentEl], { clearProps: "all" });
-      if (initialMetaEl) gsap.set(initialMetaEl, { clearProps: "all" });
-      if (watermarkEl) gsap.set(watermarkEl, { clearProps: "all" });
-    });
+    };
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      mm.revert();
+      isMounted = false;
+      window.removeEventListener("resize", handleResize);
+      mmInstance?.revert();
     };
   }, []);
 
@@ -325,15 +334,16 @@ export function PortfolioHero({
             {/* LEFT: Portrait Card */}
             <div
               ref={portraitWrapperRef}
-              className="w-[200px] sm:w-[240px] lg:w-[350px] xl:w-[390px] h-[260px] sm:h-[310px] lg:h-[470px] xl:h-[510px] shrink-0 relative rounded-2xl overflow-hidden border border-black/[0.08] dark:border-[var(--border-subtle)] bg-[var(--bg-surface)] shadow-[var(--shadow-portrait)] group will-change-transform"
+              className="w-[200px] sm:w-[240px] lg:w-[350px] xl:w-[390px] h-[260px] sm:h-[310px] lg:h-[470px] xl:h-[510px] shrink-0 relative rounded-2xl overflow-hidden border border-black/[0.08] dark:border-[var(--border-subtle)] bg-[var(--bg-surface)] shadow-[var(--shadow-portrait)] group lg:will-change-transform"
             >
               <Image
                 src="/images/avatar.jpg"
                 alt={name}
                 fill
                 priority
-                sizes="(max-width: 640px) 200px, (max-width: 1024px) 240px, 390px"
-                className="object-cover object-top filter grayscale contrast-[120%] brightness-[92%] dark:contrast-[115%] dark:brightness-[95%] transition-all duration-500 group-hover:contrast-[126%]"
+                fetchPriority="high"
+                sizes="(max-width: 640px) 146px, (max-width: 1024px) 240px, (max-width: 1280px) 350px, 390px"
+                className="object-cover object-top filter grayscale contrast-[120%] brightness-[92%] dark:contrast-[115%] dark:brightness-[95%] transition-[filter] duration-300 group-hover:contrast-[126%]"
               />
 
               {/* Subtle neutral ground vignette behind caption bar (zero white fog in light mode) */}
@@ -355,7 +365,7 @@ export function PortfolioHero({
             {/* RIGHT: Content Section */}
             <div
               ref={rightContentRef}
-              className="flex-1 min-w-0 w-full will-change-transform text-center lg:text-left"
+              className="flex-1 min-w-0 w-full lg:will-change-transform text-center lg:text-left"
             >
               {/* Session Tag */}
               <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5 sm:gap-3 mb-3 sm:mb-3.5">

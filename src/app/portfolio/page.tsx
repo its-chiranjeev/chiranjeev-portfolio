@@ -15,10 +15,10 @@ import {
   getSiteConfig,
 } from "@/lib/content";
 import { getFeaturedProjects } from "@/lib/projects";
-import { getAbsoluteUrl } from "@/lib/env";
 import type { Metadata } from "next";
 
-const canonicalUrl = getAbsoluteUrl("/portfolio");
+const siteUrl = (process.env.SITE_URL?.trim() || "http://localhost:3000").replace(/\/+$/, "");
+const canonicalUrl = `${siteUrl}/portfolio`;
 
 export const metadata: Metadata = {
   title: "Main Portfolio",
@@ -82,7 +82,7 @@ export default function PortfolioPage() {
         />
         <ContactSection site={site} />
       </main>
-      <PortfolioFooter />
+      <PortfolioFooter isPortfolioPage />
     </div>
   );
 }

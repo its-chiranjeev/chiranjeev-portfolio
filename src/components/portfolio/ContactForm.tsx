@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/Button";
-import { env } from "@/lib/env";
 import {
   AlertCircle,
   CheckCircle2,
@@ -49,9 +48,15 @@ export function ContactForm() {
   const MAX_MESSAGE_LENGTH = 3000;
   const MIN_MESSAGE_LENGTH = 20;
 
-  useEffect(() => {
+  const hasPrefetchedRef = useRef(false);
+
+  const handlePrefetchThankYou = () => {
+    if (hasPrefetchedRef.current) return;
+    hasPrefetchedRef.current = true;
     router.prefetch("/thank-you");
-  }, [router]);
+  };
+
+
 
   // Validate all inputs before submission
   const validateForm = (): boolean => {
@@ -126,8 +131,7 @@ export function ContactForm() {
     }
 
     // Check Access Key
-    const accessKey =
-      env.web3formsAccessKey || process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY?.trim();
+    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY?.trim();
 
     if (!accessKey) {
       setStatus("error");
@@ -245,7 +249,12 @@ export function ContactForm() {
         )}
       </div>
 
-      <form onSubmit={handleSubmit} noValidate className="space-y-5">
+      <form
+        onSubmit={handleSubmit}
+        onFocusCapture={handlePrefetchThankYou}
+        noValidate
+        className="space-y-5"
+      >
         {/* Hidden Honeypot bot protection field */}
         <input
           type="checkbox"

@@ -27,7 +27,7 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
               key={project.slug}
               project={project}
               index={idx}
-              priority={idx === 0}
+              priority={false}
             />
           ))}
         </div>
