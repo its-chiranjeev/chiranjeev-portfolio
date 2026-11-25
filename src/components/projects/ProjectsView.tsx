@@ -3,9 +3,10 @@
 import { Container } from "@/components/ui/Container";
 import { ProjectCard } from "@/components/projects/ProjectCard";
 import { ProjectCaseStudy } from "@/types/project";
-import { ArrowLeft, Filter, FolderGit2, Layers, Terminal } from "lucide-react";
+import { ArrowLeft, ChevronDown, Filter, FolderGit2, Layers, Terminal } from "lucide-react";
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import { BottomSheet, BottomSheetOption } from "@/components/ui/BottomSheet";
 
 interface ProjectsViewProps {
   projects: ProjectCaseStudy[];
@@ -28,6 +29,28 @@ export function ProjectsView({ projects }: ProjectsViewProps) {
     if (selectedCategory === "ALL") return projects;
     return projects.filter((p) => p.category === selectedCategory);
   }, [projects, selectedCategory]);
+
+  const [isFilterSheetOpen, setIsFilterSheetOpen] = useState(false);
+
+  const currentCount = useMemo(() => {
+    return selectedCategory === "ALL"
+      ? projects.length
+      : projects.filter((p) => p.category === selectedCategory).length;
+  }, [projects, selectedCategory]);
+
+  const bottomSheetOptions: BottomSheetOption[] = useMemo(() => {
+    return categories.map((cat) => {
+      const count =
+        cat === "ALL"
+          ? projects.length
+          : projects.filter((p) => p.category === cat).length;
+      return {
+        id: cat,
+        label: cat === "ALL" ? "All Categories" : cat,
+        count,
+      };
+    });
+  }, [categories, projects]);
 
   return (
     <div className="py-12 sm:py-16">
@@ -82,34 +105,85 @@ export function ProjectsView({ projects }: ProjectsViewProps) {
 
         {/* Category Filters Bar */}
         {categories.length > 2 && (
-          <div className="mb-8 flex flex-wrap items-center gap-2">
-            <span className="text-xs font-mono text-[var(--text-tertiary)] flex items-center gap-1.5 mr-2">
-              <Filter className="w-3.5 h-3.5" />
-              <span>Filter:</span>
-            </span>
-            {categories.map((cat) => {
-              const count =
-                cat === "ALL"
-                  ? projects.length
-                  : projects.filter((p) => p.category === cat).length;
-              const isActive = selectedCategory === cat;
+          <>
+            {/* Mobile Filter Trigger (Below sm) */}
+            <div className="sm:hidden mb-6">
+              <button
+                type="button"
+                onClick={() => setIsFilterSheetOpen(true)}
+                className="w-full flex items-center justify-between px-4 py-3 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-xs font-mono text-[var(--text-primary)] hover:border-[var(--accent-lime)] transition-colors cursor-pointer shadow-xs min-h-[48px]"
+                aria-label="Filter projects by category"
+                aria-haspopup="dialog"
+                aria-expanded={isFilterSheetOpen}
+              >
+                <div className="flex items-center gap-2.5 min-w-0 pr-2">
+                  <Filter className="w-4 h-4 text-[var(--accent-lime)] shrink-0" />
+                  <span className="text-[11px] text-[var(--text-tertiary)] uppercase tracking-wider shrink-0">
+                    Filter:
+                  </span>
+                  <span className="font-bold text-xs text-[var(--text-primary)] truncate">
+                    {selectedCategory === "ALL" ? "All Categories" : selectedCategory}
+                  </span>
+                  <span className="text-[10px] px-1.5 py-0.2 rounded-full font-mono bg-[var(--bg-surface-elevated)] text-[var(--text-secondary)] border border-[var(--border-subtle)] shrink-0">
+                    {currentCount}
+                  </span>
+                </div>
+                <ChevronDown className="w-4 h-4 text-[var(--text-tertiary)] shrink-0" />
+              </button>
+            </div>
 
-              return (
-                <button
-                  key={cat}
-                  type="button"
-                  onClick={() => setSelectedCategory(cat)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all cursor-pointer ${
-                    isActive
-                      ? "bg-[var(--accent-lime)] text-black font-semibold shadow-[0_0_12px_rgba(163,230,53,0.3)]"
-                      : "bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--border-strong)]"
-                  }`}
-                >
-                  {cat === "ALL" ? "All Categories" : cat} ({count})
-                </button>
-              );
-            })}
-          </div>
+            {/* Desktop Category Filters Bar (sm and Above) */}
+            <div className="hidden sm:flex sm:items-center gap-3 mb-8">
+              <span className="text-xs font-mono text-[var(--text-tertiary)] flex items-center gap-1.5 shrink-0">
+                <Filter className="w-3.5 h-3.5 text-[var(--accent-lime)]" />
+                <span>Filter:</span>
+              </span>
+              <div className="flex flex-wrap items-center gap-2">
+                {categories.map((cat) => {
+                  const count =
+                    cat === "ALL"
+                      ? projects.length
+                      : projects.filter((p) => p.category === cat).length;
+                  const isActive = selectedCategory === cat;
+
+                  return (
+                    <button
+                      key={cat}
+                      type="button"
+                      onClick={() => setSelectedCategory(cat)}
+                      className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono whitespace-nowrap cursor-pointer transition-all border ${
+                        isActive
+                          ? "bg-[var(--accent-lime)] text-[var(--accent-lime-fg)] border-[var(--accent-lime)] font-bold shadow-xs shadow-[0_0_12px_rgba(163,230,53,0.25)]"
+                          : "bg-[var(--bg-surface-elevated)] text-[var(--text-secondary)] border-[var(--border-subtle)] hover:text-[var(--text-primary)] hover:border-[var(--border-strong)]"
+                      }`}
+                    >
+                      <span>{cat === "ALL" ? "All Categories" : cat}</span>
+                      <span
+                        className={`text-[10px] px-1.5 py-0.2 rounded-full ${
+                          isActive
+                            ? "bg-black/15 text-[var(--accent-lime-fg)] font-semibold"
+                            : "bg-[var(--bg-surface-subtle)] text-[var(--text-tertiary)]"
+                        }`}
+                      >
+                        {count}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Mobile Bottom Sheet Filter Dialog */}
+            <BottomSheet
+              isOpen={isFilterSheetOpen}
+              onClose={() => setIsFilterSheetOpen(false)}
+              title="Filter Projects"
+              description="Select a category to narrow the catalog"
+              options={bottomSheetOptions}
+              selectedId={selectedCategory}
+              onSelect={(cat) => setSelectedCategory(cat)}
+            />
+          </>
         )}
 
         {/* Project Collection List / Grid */}
