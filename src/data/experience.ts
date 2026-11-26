@@ -1,5 +1,9 @@
 import { ExperienceItem } from "@/types/experience";
 
+export const CERTIFICATE_ASSETS = {
+  DIGIXITO_INTERNSHIP: "/certificates/Chiranjeev-Rastogi-Digixito-Internship-Certificate.pdf",
+} as const;
+
 export const experienceData: ExperienceItem[] = [
   {
     id: "digixito-media-intern",
@@ -7,9 +11,15 @@ export const experienceData: ExperienceItem[] = [
     company: "Digixito Media Pvt. Ltd.",
     logo: "/images/companies/digixito.png",
     employmentType: "Internship",
-    location: "Noida, India (Hybrid)",
-    period: "2026",
+    location: "Noida, India (On-site)",
+    period: "May 2026 — Nov 2026 (6 mos)",
     current: false,
+    certificate: {
+      title: "Internship Completion Certificate",
+      issuer: "Digixito Media Pvt. Ltd.",
+      fileUrl: CERTIFICATE_ASSETS.DIGIXITO_INTERNSHIP,
+      downloadName: "Chiranjeev-Rastogi-Digixito-Internship-Certificate.pdf",
+    },
     summary:
       "Contributed individual backend engineering across production-oriented client applications, building modular REST APIs, multi-role authentication systems, transactional booking lifecycles, and third-party payment workflows.",
     highlights: [

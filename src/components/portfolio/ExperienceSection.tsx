@@ -1,9 +1,13 @@
+"use client";
+
+import { useState } from "react";
 import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { ExperienceItem } from "@/types/experience";
-import { Briefcase, Calendar, MapPin } from "lucide-react";
+import { CertificateModal } from "@/components/ui/CertificateModal";
+import { ExperienceCertificate, ExperienceItem } from "@/types/experience";
+import { Briefcase, Calendar, FileText, MapPin, ShieldCheck } from "lucide-react";
 import Image from "next/image";
 
 interface ExperienceSectionProps {
@@ -11,6 +15,8 @@ interface ExperienceSectionProps {
 }
 
 export function ExperienceSection({ experiences }: ExperienceSectionProps) {
+  const [selectedCertificate, setSelectedCertificate] = useState<ExperienceCertificate | null>(null);
+
   return (
     <section id="experience" className="py-20 border-b border-[var(--border-subtle)]">
       <Container>
@@ -50,6 +56,14 @@ export function ExperienceSection({ experiences }: ExperienceSectionProps) {
                       <Badge variant={exp.employmentType === "Internship" ? "lime" : "default"}>
                         {exp.employmentType}
                       </Badge>
+                      {exp.certificate && (
+                        <span
+                          className="inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] font-mono font-medium py-0.5 px-2.5 rounded-full bg-[var(--bg-surface-elevated)] text-[var(--accent-lime)] border border-[var(--accent-lime)]/30 shadow-2xs tracking-tight"
+                        >
+                          <ShieldCheck className="w-3.5 h-3.5 text-[var(--accent-lime)] shrink-0" />
+                          <span>Verified 6-Month Internship Credential</span>
+                        </span>
+                      )}
                     </div>
                     <div className="flex items-center gap-2">
                       {exp.logo && (
@@ -104,25 +118,54 @@ export function ExperienceSection({ experiences }: ExperienceSectionProps) {
                   </ul>
                 </div>
 
-                {/* Tech Pills */}
-                <div className="pt-4 border-t border-[var(--border-subtle)] flex flex-wrap gap-1.5 items-center">
-                  <span className="text-xs font-mono text-[var(--text-tertiary)] mr-2">
-                    Stack:
-                  </span>
-                  {exp.technologies.map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-2 py-0.5 rounded bg-[var(--bg-surface-elevated)] border border-[var(--border-subtle)] text-[11px] font-mono text-[var(--text-secondary)]"
-                    >
-                      {tech}
+                {/* Tech Pills & Actions */}
+                <div className="pt-4 border-t border-[var(--border-subtle)] flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
+                  <div className="flex flex-wrap gap-1.5 items-center">
+                    <span className="text-xs font-mono text-[var(--text-tertiary)] mr-2">
+                      Stack:
                     </span>
-                  ))}
+                    {exp.technologies.map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-2 py-0.5 rounded bg-[var(--bg-surface-elevated)] border border-[var(--border-subtle)] text-[11px] font-mono text-[var(--text-secondary)]"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* View Certificate Action (Only on Digixito Card) */}
+                  {exp.certificate && (
+                    <div className="shrink-0 flex items-center justify-end sm:self-center">
+                      <button
+                        type="button"
+                        onClick={() => setSelectedCertificate(exp.certificate || null)}
+                        className="inline-flex items-center justify-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-mono font-semibold bg-[var(--bg-surface-elevated)] hover:bg-[var(--accent-lime-muted)] text-[var(--text-primary)] hover:text-[var(--accent-lime)] border border-[var(--border-subtle)] hover:border-[var(--accent-lime)]/40 transition-all cursor-pointer shadow-xs min-h-[36px] w-full sm:w-auto"
+                        aria-label={`View ${exp.certificate.title} for ${exp.company}`}
+                      >
+                        <FileText className="w-3.5 h-3.5 text-[var(--accent-lime)]" />
+                        <span>View Certificate</span>
+                      </button>
+                    </div>
+                  )}
                 </div>
               </Card>
             </div>
           ))}
         </div>
       </Container>
+
+      {/* Certificate Modal Dialog */}
+      {selectedCertificate && (
+        <CertificateModal
+          isOpen={!!selectedCertificate}
+          onClose={() => setSelectedCertificate(null)}
+          title={selectedCertificate.title}
+          subtitle={selectedCertificate.issuer}
+          fileUrl={selectedCertificate.fileUrl}
+          downloadName={selectedCertificate.downloadName}
+        />
+      )}
     </section>
   );
 }

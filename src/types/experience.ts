@@ -4,6 +4,13 @@ export type EmploymentType =
   | "Contract"
   | "Independent";
 
+export interface ExperienceCertificate {
+  title: string;
+  issuer: string;
+  fileUrl: string;
+  downloadName: string;
+}
+
 export interface ExperienceItem {
   id: string;
   role: string;
@@ -17,4 +24,5 @@ export interface ExperienceItem {
   summary: string;
   highlights: string[];
   technologies: string[];
+  certificate?: ExperienceCertificate;
 }
