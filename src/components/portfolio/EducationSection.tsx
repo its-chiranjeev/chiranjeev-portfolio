@@ -72,7 +72,7 @@ export function EducationSection({
             ))}
           </div>
 
-          {/* Right Column: Certifications */}
+          {/* Right Column: Verified Certifications */}
           <div className="lg:col-span-5 space-y-6">
             <h3 className="text-sm font-mono uppercase tracking-wider text-[var(--text-tertiary)] font-semibold flex items-center gap-2">
               <Award className="w-4 h-4 text-[var(--accent-lime)]" />

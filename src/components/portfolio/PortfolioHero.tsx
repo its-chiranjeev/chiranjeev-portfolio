@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import { scrollToTarget } from "@/lib/smoothScroll";
 import {
   ArrowDown,
   Download,
@@ -443,6 +444,15 @@ export function PortfolioHero({
               <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5 sm:gap-3">
                 <Button
                   href="#projects"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToTarget("#projects", {
+                      offset: 64,
+                      duration: 0.9,
+                      ease: "power2.inOut",
+                      updateHash: true,
+                    });
+                  }}
                   variant="primary"
                   size="sm"
                   className="font-mono text-xs uppercase tracking-wider"
@@ -464,11 +474,20 @@ export function PortfolioHero({
 
                 <Button
                   href="#contact"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToTarget("#contact", {
+                      offset: 64,
+                      duration: 0.9,
+                      ease: "power2.inOut",
+                      updateHash: true,
+                    });
+                  }}
                   variant="secondary"
                   size="sm"
                   className="font-mono text-xs"
                 >
-                  <span>Get in Touch</span>
+                  <span>Hire Me</span>
                 </Button>
               </div>
             </div>

@@ -23,12 +23,13 @@ type ButtonAsButton = BaseButtonProps &
     href?: undefined;
   };
 
-type ButtonAsLink = BaseButtonProps & {
-  href: string;
-  target?: string;
-  rel?: string;
-  download?: boolean | string;
-};
+type ButtonAsLink = BaseButtonProps &
+  Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, keyof BaseButtonProps> & {
+    href: string;
+    target?: string;
+    rel?: string;
+    download?: boolean | string;
+  };
 
 export type ButtonProps = ButtonAsButton | ButtonAsLink;
 
@@ -66,7 +67,7 @@ export function Button({
   );
 
   if ("href" in props && typeof props.href === "string") {
-    const { href, target, rel, download } = props;
+    const { href, target, rel, download, onClick, ...restAnchorProps } = props;
     const isExternal = href.startsWith("http") || href.startsWith("mailto:");
     const isDirectLink = isExternal || Boolean(download) || href.startsWith("#") || href.endsWith(".pdf");
 
@@ -77,7 +78,9 @@ export function Button({
           target={target || (isExternal && !href.startsWith("mailto:") ? "_blank" : undefined)}
           rel={rel || (isExternal ? "noopener noreferrer" : undefined)}
           download={download}
+          onClick={onClick}
           className={combinedClassName}
+          {...restAnchorProps}
         >
           {children}
         </a>
@@ -90,7 +93,9 @@ export function Button({
         target={target}
         rel={rel}
         download={download}
+        onClick={onClick}
         className={combinedClassName}
+        {...restAnchorProps}
       >
         {children}
       </Link>
