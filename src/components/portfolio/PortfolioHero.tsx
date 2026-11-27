@@ -330,7 +330,7 @@ export function PortfolioHero({
         </div>
 
         {/* Main Hero Container */}
-        <Container className="relative z-10 w-full">
+        <Container size="wide" className="relative z-10 w-full">
           <div className="flex flex-col lg:flex-row items-center lg:items-center justify-between gap-6 sm:gap-8 lg:gap-10 xl:gap-14">
 
             {/* LEFT: Portrait Card */}

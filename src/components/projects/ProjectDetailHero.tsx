@@ -13,7 +13,7 @@ interface ProjectDetailHeroProps {
 export function ProjectDetailHero({ project }: ProjectDetailHeroProps) {
   return (
     <section className="pt-12 pb-16 border-b border-[var(--border-subtle)] bg-[var(--bg-canvas)]">
-      <Container>
+      <Container size="wide">
         {/* Top Indicator */}
         <div className="flex flex-wrap items-center gap-3 mb-6">
           <span className="font-mono text-xs font-bold uppercase tracking-wider text-[var(--accent-lime)] px-2.5 py-1 rounded bg-[var(--accent-lime-muted)] border border-[var(--accent-lime)]/30">

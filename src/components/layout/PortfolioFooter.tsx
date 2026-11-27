@@ -43,7 +43,7 @@ export function PortfolioFooter({ isPortfolioPage = false }: PortfolioFooterProp
 
   return (
     <footer className="border-t border-[var(--border-subtle)] bg-[var(--bg-canvas)] py-12 text-xs font-mono text-[var(--text-tertiary)]">
-      <Container>
+      <Container size="wide">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-[var(--border-subtle)]">
           {/* Left: Identity */}
           <div className="flex flex-col sm:flex-row items-center sm:items-start md:items-center gap-3.5 text-center sm:text-left">

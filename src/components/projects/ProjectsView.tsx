@@ -85,7 +85,7 @@ export function ProjectsView({ projects }: ProjectsViewProps) {
 
   return (
     <div className="py-12 sm:py-16">
-      <Container>
+      <Container size="wide">
         {/* Navigation Breadcrumb */}
         <div className="mb-8 flex items-center justify-between">
           <Link

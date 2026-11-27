@@ -12,7 +12,7 @@ interface ProjectsSectionProps {
 export function ProjectsSection({ projects }: ProjectsSectionProps) {
   return (
     <section id="projects" className="py-20 border-b border-[var(--border-subtle)]">
-      <Container>
+      <Container size="wide">
         <SectionHeading
           badge="SELECTED WORK"
           number="04"
