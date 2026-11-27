@@ -85,17 +85,21 @@ export default async function ProjectDetailPage({ params }: PageProps) {
         <article>
           <ProjectDetailHero project={project} />
 
-          <Container className="py-12">
-            <div className="space-y-4">
-              {project.sections.map((section) => (
-                <ProjectSectionRenderer key={section.id} section={section} />
-              ))}
-            </div>
+          <div className="py-12 space-y-4">
+            {project.sections.map((section) => (
+              <Container
+                key={section.id}
+                size={section.type === "gallery" ? "wide" : "default"}
+              >
+                <ProjectSectionRenderer section={section} />
+              </Container>
+            ))}
 
-            <ProjectNavigation prev={prev} next={next} />
-
-            <ProjectFooterCTA />
-          </Container>
+            <Container size="default">
+              <ProjectNavigation prev={prev} next={next} />
+              <ProjectFooterCTA />
+            </Container>
+          </div>
         </article>
       </main>
 

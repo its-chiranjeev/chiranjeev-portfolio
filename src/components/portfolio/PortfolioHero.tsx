@@ -330,7 +330,7 @@ export function PortfolioHero({
         </div>
 
         {/* Main Hero Container */}
-        <Container className="relative z-10 w-full">
+        <Container size="wide" className="relative z-10 w-full">
           <div className="flex flex-col lg:flex-row items-center lg:items-center justify-between gap-6 sm:gap-8 lg:gap-10 xl:gap-14">
 
             {/* LEFT: Portrait Card */}
@@ -339,7 +339,7 @@ export function PortfolioHero({
               className="w-[200px] sm:w-[240px] lg:w-[350px] xl:w-[390px] h-[260px] sm:h-[310px] lg:h-[470px] xl:h-[510px] shrink-0 relative rounded-2xl overflow-hidden border border-black/[0.08] dark:border-[var(--border-subtle)] bg-[var(--bg-surface)] shadow-[var(--shadow-portrait)] group lg:will-change-transform"
             >
               <Image
-                src="/images/avatar.jpg"
+                src="/images/avatar.webp"
                 alt={name}
                 fill
                 priority

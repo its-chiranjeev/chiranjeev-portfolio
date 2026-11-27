@@ -134,7 +134,7 @@ const jsonLd = {
   ...(siteUrl
     ? {
         url: siteUrl,
-        image: `${siteUrl}/images/avatar.jpg`,
+        image: `${siteUrl}/images/avatar.webp`,
       }
     : {}),
   sameAs: [

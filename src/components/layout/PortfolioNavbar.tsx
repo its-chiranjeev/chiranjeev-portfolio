@@ -84,7 +84,7 @@ export function PortfolioNavbar() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-[var(--border-subtle)] bg-[var(--bg-canvas)]/85 backdrop-blur-md">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div className="max-w-6xl min-[1280px]:max-w-[1280px] min-[1600px]:max-w-[1400px] min-[1920px]:max-w-[1520px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Left: Brand Identity */}
         <div className="flex items-center gap-4">
           <CRLogo
