@@ -339,7 +339,7 @@ export function PortfolioHero({
               className="w-[200px] sm:w-[240px] lg:w-[350px] xl:w-[390px] h-[260px] sm:h-[310px] lg:h-[470px] xl:h-[510px] shrink-0 relative rounded-2xl overflow-hidden border border-black/[0.08] dark:border-[var(--border-subtle)] bg-[var(--bg-surface)] shadow-[var(--shadow-portrait)] group lg:will-change-transform"
             >
               <Image
-                src="/images/avatar.jpg"
+                src="/images/avatar.webp"
                 alt={name}
                 fill
                 priority

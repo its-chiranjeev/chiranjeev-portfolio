@@ -94,6 +94,62 @@ export interface ResultsSection extends BaseSection {
   takeaways?: string[];
 }
 
+export interface FeaturedShowcaseItem {
+  id: string;
+  slug: string;
+  title: string;
+  subtitle: string;
+  role: string;
+  roleBadge: string;
+  description: string;
+  artworkSrc: string;
+  artworkType: "promotional-mockup";
+  deviceMeta: string;
+  width: number;
+  height: number;
+  techTags: string[];
+}
+
+export type GalleryCategory =
+  | "All"
+  | "Customer"
+  | "Admin"
+  | "Purohit"
+  | "Authentication"
+  | "Services";
+
+export type DeviceMode = "desktop" | "tablet" | "mobile";
+
+export interface GalleryScreenshot {
+  id: string;
+  slug: string;
+  title: string;
+  description: string;
+  category: "Customer" | "Admin" | "Purohit" | "Authentication" | "Services";
+  src: string;
+  pngSrc?: string;
+  originalSrc?: string;
+  width: number;
+  height: number;
+  availableDevices?: DeviceMode[];
+  deviceCaptures?: {
+    desktop?: string;
+    tablet?: string;
+    mobile?: string;
+  };
+  techHighlights?: string[];
+  notes?: string;
+}
+
+export interface GallerySection extends BaseSection {
+  type: "gallery";
+  eyebrow?: string;
+  subtitle?: string;
+  description?: string;
+  featuredShowcase: FeaturedShowcaseItem[];
+  screenshots?: GalleryScreenshot[];
+}
+
 export type CaseStudySection =
   | OverviewSection
   | ArchitectureSection
@@ -101,7 +157,8 @@ export type CaseStudySection =
   | ChallengesSolutionsSection
   | CodeExampleSection
   | KeyFeaturesSection
-  | ResultsSection;
+  | ResultsSection
+  | GallerySection;
 
 export interface ProjectCaseStudy {
   slug: string;

@@ -2,6 +2,7 @@ import { ArchitectureSection } from "@/components/projects/sections/Architecture
 import { ChallengesSolutionsSection } from "@/components/projects/sections/ChallengesSolutionsSection";
 import { CodeExampleSection } from "@/components/projects/sections/CodeExampleSection";
 import { ContributionsSection } from "@/components/projects/sections/ContributionsSection";
+import { GallerySection } from "@/components/projects/sections/GallerySection";
 import { KeyFeaturesSection } from "@/components/projects/sections/KeyFeaturesSection";
 import { OverviewSection } from "@/components/projects/sections/OverviewSection";
 import { ResultsSection } from "@/components/projects/sections/ResultsSection";
@@ -27,6 +28,8 @@ export function ProjectSectionRenderer({ section }: ProjectSectionRendererProps)
       return <KeyFeaturesSection section={section} />;
     case "results":
       return <ResultsSection section={section} />;
+    case "gallery":
+      return <GallerySection section={section} />;
     default: {
       const _exhaustiveCheck: never = section;
       void _exhaustiveCheck;
