@@ -7,7 +7,6 @@ import {
   GithubIcon,
   LinkedinIcon,
   XIcon,
-  InstagramIcon,
   LeetCodeIcon,
 } from "@/components/ui/icons";
 import { SiteConfig } from "@/types/site";
@@ -74,7 +73,7 @@ export function ContactSection({ site }: ContactSectionProps) {
                       href={`mailto:${site.email}`}
                       aria-label={`Send email to ${site.email}`}
                       title={`Send email to ${site.email}`}
-                      className="w-8 h-8 rounded-lg border border-[var(--border-subtle)] hover:border-[var(--border-strong)] bg-[var(--bg-surface-elevated)] flex items-center justify-center text-[var(--text-secondary)] hover:text-[var(--accent-lime)] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--focus-ring)]"
+                      className="relative w-9 h-9 sm:w-8 sm:h-8 rounded-lg border border-[var(--border-subtle)] hover:border-[var(--border-strong)] bg-[var(--bg-surface-elevated)] flex items-center justify-center text-[var(--text-secondary)] hover:text-[var(--accent-lime)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] after:absolute after:-inset-1.5 sm:after:hidden after:content-['']"
                     >
                       <Send className="w-3.5 h-3.5" aria-hidden="true" />
                     </a>
@@ -105,7 +104,7 @@ export function ContactSection({ site }: ContactSectionProps) {
                       href={`tel:${rawTel}`}
                       aria-label={`Call ${verifiedPhone}`}
                       title={`Call ${verifiedPhone}`}
-                      className="w-8 h-8 rounded-lg border border-[var(--border-subtle)] hover:border-[var(--border-strong)] bg-[var(--bg-surface-elevated)] flex items-center justify-center text-[var(--text-secondary)] hover:text-[var(--accent-lime)] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--focus-ring)] shrink-0"
+                      className="relative w-9 h-9 sm:w-8 sm:h-8 rounded-lg border border-[var(--border-subtle)] hover:border-[var(--border-strong)] bg-[var(--bg-surface-elevated)] flex items-center justify-center text-[var(--text-secondary)] hover:text-[var(--accent-lime)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] shrink-0 after:absolute after:-inset-1.5 sm:after:hidden after:content-['']"
                     >
                       <Phone className="w-3.5 h-3.5" aria-hidden="true" />
                     </a>
@@ -113,11 +112,11 @@ export function ContactSection({ site }: ContactSectionProps) {
                 )}
               </div>
 
-              {/* Response SLA / Availability Banner */}
+              {/* Response Availability Banner */}
               <div className="p-3.5 rounded-xl bg-[var(--bg-surface-elevated)] border border-[var(--border-subtle)] flex items-center gap-3 text-xs font-mono mb-8">
                 <Clock className="w-4 h-4 text-[var(--accent-lime)] shrink-0" aria-hidden="true" />
                 <span className="text-[var(--text-secondary)]">
-                  Response SLA: <strong className="text-[var(--text-primary)] font-semibold">Within 24 Hours</strong>
+                  Availability: <strong className="text-[var(--text-primary)] font-semibold">Usually responds within 1–2 business days</strong>
                 </span>
               </div>
             </div>
@@ -133,7 +132,7 @@ export function ContactSection({ site }: ContactSectionProps) {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="GitHub Profile"
-                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-subtle)] hover:border-[var(--border-strong)] hover:bg-[var(--bg-surface-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] text-xs font-mono transition-all"
+                  className="relative inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-subtle)] hover:border-[var(--border-strong)] hover:bg-[var(--bg-surface-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] text-xs font-mono transition-all after:absolute after:-inset-1 sm:after:hidden after:content-['']"
                 >
                   <GithubIcon className="w-3.5 h-3.5 text-[var(--accent-lime)]" />
                   <span>GitHub</span>
@@ -143,7 +142,7 @@ export function ContactSection({ site }: ContactSectionProps) {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="LinkedIn Profile"
-                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-subtle)] hover:border-[var(--border-strong)] hover:bg-[var(--bg-surface-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] text-xs font-mono transition-all"
+                  className="relative inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-subtle)] hover:border-[var(--border-strong)] hover:bg-[var(--bg-surface-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] text-xs font-mono transition-all after:absolute after:-inset-1 sm:after:hidden after:content-['']"
                 >
                   <LinkedinIcon className="w-3.5 h-3.5 text-[var(--accent-lime)]" />
                   <span>LinkedIn</span>
@@ -153,27 +152,17 @@ export function ContactSection({ site }: ContactSectionProps) {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="X Profile"
-                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-subtle)] hover:border-[var(--border-strong)] hover:bg-[var(--bg-surface-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] text-xs font-mono transition-all"
+                  className="relative inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-subtle)] hover:border-[var(--border-strong)] hover:bg-[var(--bg-surface-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] text-xs font-mono transition-all after:absolute after:-inset-1 sm:after:hidden after:content-['']"
                 >
                   <XIcon className="w-3.5 h-3.5 text-[var(--accent-lime)]" />
                   <span>X</span>
-                </a>
-                <a
-                  href={site.socials.instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Instagram Profile"
-                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-subtle)] hover:border-[var(--border-strong)] hover:bg-[var(--bg-surface-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] text-xs font-mono transition-all"
-                >
-                  <InstagramIcon className="w-3.5 h-3.5 text-[var(--accent-lime)]" />
-                  <span>Instagram</span>
                 </a>
                 <a
                   href={site.socials.leetcode}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="LeetCode Profile"
-                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-subtle)] hover:border-[var(--border-strong)] hover:bg-[var(--bg-surface-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] text-xs font-mono transition-all"
+                  className="relative inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-subtle)] hover:border-[var(--border-strong)] hover:bg-[var(--bg-surface-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] text-xs font-mono transition-all after:absolute after:-inset-1 sm:after:hidden after:content-['']"
                 >
                   <LeetCodeIcon className="w-3.5 h-3.5 text-[var(--accent-lime)]" />
                   <span>LeetCode</span>
@@ -196,7 +185,7 @@ export function ContactSection({ site }: ContactSectionProps) {
                   </h3>
                 </div>
                 <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-[var(--accent-lime-muted)] text-[var(--accent-lime)] border border-[var(--accent-lime)]/20 shrink-0">
-                  Web3Forms Verified
+                  WEB3FORMS INTEGRATED
                 </span>
               </div>
 
